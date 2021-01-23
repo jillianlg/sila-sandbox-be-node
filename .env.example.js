@@ -1,0 +1,7 @@
+const APP_HANDLE = 'YOUR APP HANDLE HERE';
+const APP_PRIVATE_KEY = 'YOUR APP PRIVATE KEY HERE';
+
+module.exports = {
+    APP_HANDLE,
+    APP_PRIVATE_KEY
+}

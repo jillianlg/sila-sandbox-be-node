@@ -1,0 +1,11 @@
+# misc
+.DS_Store
+.vscode
+node_modules
+
+# build
+function.zip
+
+# env
+.env.js
+userInfo.json
