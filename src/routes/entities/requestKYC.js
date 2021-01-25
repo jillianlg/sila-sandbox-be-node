@@ -5,7 +5,7 @@ const util = require('util');
 const readFile = util.promisify(fs.readFile);
 
 // local packages
-const { encryptMessage decryptPrivateKey } = require('../../utils');
+const { encryptMessage, decryptPrivateKey } = require('../../utils');
 const { APP_PRIVATE_KEY, APP_HANDLE } = require('../../../.env');
 
 // consts
