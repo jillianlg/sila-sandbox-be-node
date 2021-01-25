@@ -1,5 +1,10 @@
+// third party packages
+const crypto = require('crypto');
 const EthCrypto = require('eth-crypto');
 const Web3 = require('web3');
+
+// consts
+const ENCRYPTION_KEY = require('../.env');
 
 //creates a wallet on Ethereum
 function createWallet() {
@@ -10,6 +15,23 @@ function createWallet() {
         privateKey: wallet.privateKey
     };
 }
+
+// encrypts a private key
+function encryptPrivateKey(privateKey) {
+    const encryptionKey = crypto.createCipheriv('aes-128-cbc', ENCRYPTION_KEY);
+    let encryptedKey = encryptionKey.update(privateKey, 'utf8', 'hex');
+    encryptedKey += encryptionKey.final('hex');
+    return encryptedKey;
+}
+
+// decrypts a private key
+function decryptPrivateKey(encryptedPrivateKey) {
+    const decryptionKey = crypto.createDecipheriv('aes-128-cbc', ENCRYPTION_KEY);
+    let decryptedKey = decryptionKey.update(encryptedPrivateKey, 'hex', 'utf8');
+    decryptedKey += decryptionKey.final('utf8');
+    return decryptedKey;
+}
+
 
 // encrypts a message
 function encryptMessage(privateKey, message) {
@@ -25,5 +47,7 @@ function encryptMessage(privateKey, message) {
 
 module.exports = {
     createWallet,
-    encryptMessage
+    encryptMessage,
+    encryptPrivateKey,
+    decryptPrivateKey
 }

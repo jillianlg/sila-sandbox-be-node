@@ -6,11 +6,14 @@ const util = require('util');
 const writeFile = util.promisify(fs.writeFile);
 
 // local packages
-const { createWallet, encryptMessage } = require('../../utils');
+const { createWallet, encryptMessage, encryptPrivateKey } = require('../../utils');
 
 // consts
 const { SILA_URLS } = require('../../consts');
 const { APP_HANDLE, APP_PRIVATE_KEY } = require('../../../.env');
+
+// NOTE: This only registers a user with Sila. It does not handle login informtion.
+// You will need to create a separate login structure for your app.
 
 async function register(userInfo) {
     // create the user handle
@@ -25,7 +28,7 @@ async function register(userInfo) {
     const wallet = createWallet();
     const KMSUserInfo = JSON.stringify({
         USER_HANDLE,
-        USER_PRIVATE_KEY: wallet.privateKey
+        USER_PRIVATE_KEY: encryptPrivateKey(wallet.privateKey)
     });
     // NOTE: this will OVERWRITE userInfo.json every time it is run
     await writeFile('userInfo.json', KMSUserInfo);

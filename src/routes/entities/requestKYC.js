@@ -5,7 +5,7 @@ const util = require('util');
 const readFile = util.promisify(fs.readFile);
 
 // local packages
-const { encryptMessage } = require('../../utils');
+const { encryptMessage decryptPrivateKey } = require('../../utils');
 const { APP_PRIVATE_KEY, APP_HANDLE } = require('../../../.env');
 
 // consts
@@ -23,11 +23,12 @@ async function requestKYC(data) {
         message: 'header_msg'
     }
 
-    // immitates retrieving the user's private key from your KMS
-    let USER_PRIVATE_KEY;
-    const userInfo = await readFile('./userInfo.json', 'utf8')
-    const parsedUserInfo = JSON.parse(userInfo);
-    USER_PRIVATE_KEY = parsedUserInfo.USER_PRIVATE_KEY;
+     // imitates retrieving the user's private key from your KMS
+     const userInfo = await readFile('./userInfo.json', 'utf8')
+     const parsedUserInfo = JSON.parse(userInfo);
+     const encryptedPrivateKey = parsedUserInfo.USER_PRIVATE_KEY;
+     const USER_PRIVATE_KEY = decryptPrivateKey(encryptedPrivateKey);
+ 
     
     if(!USER_PRIVATE_KEY) return new Error('No user found');
 

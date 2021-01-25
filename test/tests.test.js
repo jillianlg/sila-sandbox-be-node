@@ -33,7 +33,7 @@ const BIRTHDATE = '1990-02-28';
 // Using .only and .skip, only run select tests in any given execution
 
 describe('tests Sila API integration', () => {
-    it('should /register', async () => {
+    it.only('should /register', async () => {
         const body = {
             apiPath: SILA_PATHS.REGISTER,
             data: {
