@@ -10,67 +10,19 @@ const { silaAPI } = require('../index');
 // consts
 const { SILA_PATHS } = require('../src/routes/index');
 const { SILA_UPDATE_TYPES } = require('../src/routes/entities/update');
+const {
+    EMAIL,
+    ADDRESS_ALIAS,
+    STREET_ADDRESS_1,
+    CITY,
+    STATE,
+    POSTAL_CODE,
+    SSN,
+    PHONE
+} = require('./consts');
 
-// variables
-// change these variables as needed
-const FIRST_NAME = 'Firstname';
-const LAST_NAME = 'Lastname';
-const EMAIL = 'email@email.com';
-
-const ADDRESS_ALIAS = 'Home';
-const STREET_ADDRESS_1 = 'Street Address';
-const CITY = 'City';
-const STATE = 'OR';
-const POSTAL_CODE = '90210';
-
-const PHONE = '1112223333';
-
-const SSN = '111223333';
-
-const BIRTHDATE = '1990-02-28';
-
-// NOTE: These tests are not intended to be run all at once
-// Using .only and .skip, only run select tests in any given execution
 
 describe('tests Sila API integration', () => {
-    it.only('should /register', async () => {
-        const body = {
-            apiPath: SILA_PATHS.REGISTER,
-            data: {
-                firstName: FIRST_NAME,
-                lastName: LAST_NAME
-            }
-        }
-
-        const jsonBody = JSON.stringify(body);
-        const response = await silaAPI({ body: jsonBody });
-        const parsedResponse = JSON.parse(response.body);
-
-        expect(parsedResponse.success).to.equal(true);
-    })
-
-    it('should /get_entity', async () => {
-        // imitates retrieving the user handle from your database
-        const userInfo = await readFile('./userInfo.json', 'utf8')
-        const parsedData = JSON.parse(userInfo);
-        const { USER_HANDLE } = parsedData;
-
-        // prepare the request body
-        const body = {
-            apiPath: SILA_PATHS.GET_ENTITY,
-            data: {
-                userHandle: USER_HANDLE
-            }
-        }
-
-        const jsonBody = JSON.stringify(body);
-        const response = await silaAPI({ body: jsonBody });
-
-        const parsedResponse = JSON.parse(response.body);
-
-        expect(parsedResponse.success).to.equal(true);
-    })
-
     it('should /add/email', async () => {
         // imitates retrieving the user handle from your database
         const userInfo = await readFile('./userInfo.json',  'utf8')
@@ -178,74 +130,4 @@ describe('tests Sila API integration', () => {
 
         expect(parsedResponse.success).to.equal(true);
     });
-
-    it('should /update/entity', async () => {
-        // imitates retrieving the user handle from your database
-        const userInfo = await readFile('./userInfo.json',  'utf8')
-        const parsedData = JSON.parse(userInfo);
-        const { USER_HANDLE } = parsedData;
-        
-        // prepare the request body
-        const body = {
-            apiPath: SILA_PATHS.UPDATE,
-            data: {
-                type: SILA_UPDATE_TYPES.ENTITY,
-                userHandle: USER_HANDLE,
-                email: EMAIL,
-                updateBody: {
-                    birthdate: BIRTHDATE
-                }
-            }
-        }
-
-        const jsonBody = JSON.stringify(body);
-        const response = await silaAPI({ body: jsonBody });
-        const parsedResponse = JSON.parse(response.body);
-
-        expect(parsedResponse.success).to.equal(true);
-    });
-
-    it('should /request_kyc', async () => {
-        // imitates retrieving the user handle from your database
-        const userInfo = await readFile('./userInfo.json',  'utf8')
-        const parsedData = JSON.parse(userInfo);
-        const { USER_HANDLE } = parsedData;
-        
-        // prepare the request body
-        const body = {
-            apiPath: SILA_PATHS.REQUEST_KYC,
-            data: {
-                userHandle: USER_HANDLE,
-                email: EMAIL
-            }
-        }
-
-        const jsonBody = JSON.stringify(body);
-        const response = await silaAPI({ body: jsonBody });
-        const parsedResponse = JSON.parse(response.body);
-
-        expect(parsedResponse.success).to.equal(true);
-    })
-
-    it('should /check_kyc', async () => {
-        // imitates retrieving the user handle from your database
-        const userInfo = await readFile('./userInfo.json',  'utf8')
-        const parsedData = JSON.parse(userInfo);
-        const { USER_HANDLE } = parsedData;
-        
-        // prepare the request body
-        const body = {
-            apiPath: SILA_PATHS.CHECK_KYC,
-            data: {
-                userHandle: USER_HANDLE,
-                email: EMAIL
-            }
-        }
-
-        const jsonBody = JSON.stringify(body);
-        const response = await silaAPI({ body: jsonBody });
-        const parsedResponse = JSON.parse(response.body);
-
-        expect(parsedResponse.success).to.equal(true);
-    })
-})
+});
