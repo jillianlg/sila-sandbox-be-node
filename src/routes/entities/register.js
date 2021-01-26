@@ -19,21 +19,26 @@ async function register(userInfo) {
     // create the user handle
     const uuid = v4();
     const USER_HANDLE = `${APP_HANDLE}.${userInfo.firstName}.${userInfo.lastName}.${uuid}`;
-    userInfo.handle = USER_HANDLE;
+
+    const wallet = createWallet();
 
     // NOTE: Your app will need to secure user private keys using a KSM
     // ** THIS IS NOT A SECURE METHOD TO DO SO **
     // ** DO NOT USE THIS METHOD UNDER ANY CIRCUMSTANCES FOR ANYTHING OTHER THAN TESTING **
     // ** NEVER COMMIT OR SHARE PRIVATE KEYS **
-    const wallet = createWallet();
+
+    // NOTE: this will OVERWRITE userInfo.json every time it is run
+    // You will need to manually save encrypted private keys
+    // and user handles for testing endpoints
+    // that involve more than one user
     const KMSUserInfo = JSON.stringify({
         USER_HANDLE,
         USER_PRIVATE_KEY: encryptPrivateKey(wallet.privateKey)
     });
-    // NOTE: this will OVERWRITE userInfo.json every time it is run
     await writeFile('userInfo.json', KMSUserInfo);
 
-    // prepare the request body
+    // NOTE: As is, this will only register a user with the required fields
+    // See https://docs.silamoney.com/docs/register for further endpoint details
     const body = {
         header: {
             created: Math.floor(Date.now() / 1000),
