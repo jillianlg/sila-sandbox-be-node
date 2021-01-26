@@ -9,7 +9,7 @@ const { SILA_PATHS } = require('../src/routes/index');
 const {
     FIRST_NAME,
     LAST_NAME
-} = require('../consts');
+} = require('./consts');
 
 describe('tests Sila API integration', () => {
     it('should /register', async () => {
