@@ -27,7 +27,6 @@ async function getEntity(data) {
      const encryptedPrivateKey = parsedUserInfo.USER_PRIVATE_KEY;
      const USER_PRIVATE_KEY = decryptPrivateKey(encryptedPrivateKey);
  
-    
     if(!USER_PRIVATE_KEY) return new Error('No user found');    
 
     // generate authorization headers
