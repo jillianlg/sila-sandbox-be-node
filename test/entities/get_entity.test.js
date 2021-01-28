@@ -11,9 +11,31 @@ const { silaAPI } = require('../../index');
 const { SILA_PATHS } = require('../../src/routes/index');
 
 describe('tests Sila API integration', () => {
-    it('should /get_entity', async () => {
+    it.only('should /get_entity on an individual', async () => {
         // imitates retrieving the user handle from your database
         const userInfo = await readFile('./userInfo.json', 'utf8')
+        const parsedData = JSON.parse(userInfo);
+        const { USER_HANDLE } = parsedData;
+
+        // prepare the request body
+        const body = {
+            apiPath: SILA_PATHS.GET_ENTITY,
+            data: {
+                userHandle: USER_HANDLE
+            }
+        }
+
+        const jsonBody = JSON.stringify(body);
+        const response = await silaAPI({ body: jsonBody });
+
+        const parsedResponse = JSON.parse(response.body);
+
+        expect(parsedResponse.success).to.equal(true);
+    });
+    
+    it('should /get_entity on an business', async () => {
+        // imitates retrieving the user handle from your database
+        const userInfo = await readFile('./businessInfo.json', 'utf8')
         const parsedData = JSON.parse(userInfo);
         const { USER_HANDLE } = parsedData;
 

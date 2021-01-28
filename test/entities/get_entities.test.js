@@ -10,7 +10,7 @@ const { silaAPI } = require('../../index');
 // consts
 const { SILA_PATHS } = require('../../src/routes/index');
 
-describe.only('tests Sila API integration', () => {
+describe('tests Sila API integration', () => {
     it('should /get_entities w/o type', async () => {
         // imitates retrieving the user handle from your database
         const userInfo = await readFile('./userInfo.json', 'utf8')
