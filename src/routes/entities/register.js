@@ -16,26 +16,19 @@ const { APP_HANDLE, APP_PRIVATE_KEY } = require('../../../.env');
 // You will need to create a separate login structure for your app.
 
 async function register(userInfo) {
+    console.log('userInfo: ', userInfo);
     // create the user handle
     const uuid = v4();
-    const USER_HANDLE = `${APP_HANDLE}.${userInfo.firstName}.${userInfo.lastName}.${uuid}`;
+    let USER_HANDLE;
+    if(userInfo.entity.type === 'business') {
+        const flattenedBusinessName = userInfo.entity.entity_name.replace(/ /g, "-");
+        USER_HANDLE = `${APP_HANDLE}.${flattenedBusinessName}.${uuid}`;
+    } else {
+        USER_HANDLE = `${APP_HANDLE}.${userInfo.entity.first_name}.${userInfo.entity.last_name}.${uuid}`;
+    }
 
+    // create the wallet
     const wallet = createWallet();
-
-    // NOTE: Your app will need to secure user private keys using a KSM
-    // ** THIS IS NOT A SECURE METHOD TO DO SO **
-    // ** DO NOT USE THIS METHOD UNDER ANY CIRCUMSTANCES FOR ANYTHING OTHER THAN TESTING **
-    // ** NEVER COMMIT OR SHARE PRIVATE KEYS **
-
-    // NOTE: this will OVERWRITE userInfo.json every time it is run
-    // You will need to manually save encrypted private keys
-    // and user handles for testing endpoints
-    // that involve more than one user
-    const KMSUserInfo = JSON.stringify({
-        USER_HANDLE,
-        USER_PRIVATE_KEY: encryptPrivateKey(wallet.privateKey)
-    });
-    await writeFile('userInfo.json', KMSUserInfo);
 
     // NOTE: As is, this will only register a user with the required fields
     // See https://docs.silamoney.com/docs/register for further endpoint details
@@ -43,20 +36,41 @@ async function register(userInfo) {
         header: {
             created: Math.floor(Date.now() / 1000),
             auth_handle: APP_HANDLE,
-            user_handle: USER_HANDLE
+            user_handle: USER_HANDLE,
+            reference: 'ref',
         },
         message: 'entity_msg',
         crypto_entry: {
             crypto_address: wallet.address,
             crypto_code: 'ETH'
         },
-        entity: {
-            entity_name: `${userInfo.firstName}.${userInfo.lastName}`,
-            first_name: userInfo.firstName,
-            last_name: userInfo.lastName,
-            relationship: 'user'
-        }
     }
+
+    // add each data type to the body, to avoid populating data with empty strings
+    for(const key of Object.keys(userInfo)) {
+        body[key] = userInfo[key];
+    }
+
+    // NOTE: Your app will need to secure user private keys using a KSM
+    // ** THIS IS NOT A SECURE METHOD TO DO SO **
+    // ** DO NOT USE THIS METHOD UNDER ANY CIRCUMSTANCES FOR ANYTHING OTHER THAN TESTING **
+    // ** NEVER COMMIT OR SHARE PRIVATE KEYS **
+
+    // NOTE: this will OVERWRITE the .json file every time it is run
+    /**
+     * You will need to manually save encrypted private keys
+     * and user handles for testing endpoints
+     * that involve more than one user
+     */
+
+    // the type will default to 'individual' if not provided
+    const entityFileName = userInfo.entity.type === 'business' ? 'businessInfo.json' : 'userInfo.json';
+
+     const KMSEntityInfo = JSON.stringify({
+        USER_HANDLE,
+        USER_PRIVATE_KEY: encryptPrivateKey(wallet.privateKey)
+    });
+    await writeFile(entityFileName, KMSEntityInfo);
 
     // encrypt the message
     const appPrivateKey = APP_PRIVATE_KEY;

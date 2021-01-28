@@ -9,3 +9,4 @@ function.zip
 # env
 .env.js
 userInfo.json
+businessInfo.json
