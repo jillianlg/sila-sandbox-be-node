@@ -5,11 +5,11 @@ const util = require('util');
 const readFile = util.promisify(fs.readFile);
 
 // local packages
-const { silaAPI } = require('../index');
+const { silaAPI } = require('../../index');
 
 // consts
-const { SILA_PATHS } = require('../src/routes/index');
-const { EMAIL } = require('./consts');
+const { SILA_PATHS } = require('../../src/routes/index');
+const { EMAIL } = require('../consts');
 
 describe('tests Sila API integration', () => {
     it('should /request_kyc', async () => {

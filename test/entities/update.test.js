@@ -5,14 +5,18 @@ const util = require('util');
 const readFile = util.promisify(fs.readFile);
 
 // local packages
-const { silaAPI } = require('../index');
+const { silaAPI } = require('../../index');
 
 // consts
-const { SILA_PATHS } = require('../src/routes/index');
-const { EMAIL } = require('./consts');
+const { SILA_PATHS } = require('../../src/routes/index');
+const { SILA_UPDATE_TYPES } = require('../../src/routes/entities/update');
+const {
+    EMAIL,
+    BIRTHDATE
+} = require('../consts');
 
 describe('tests Sila API integration', () => {
-    it('should /check_kyc', async () => {
+    it('should /update/entity', async () => {
         // imitates retrieving the user handle from your database
         const userInfo = await readFile('./userInfo.json',  'utf8')
         const parsedData = JSON.parse(userInfo);
@@ -20,10 +24,14 @@ describe('tests Sila API integration', () => {
         
         // prepare the request body
         const body = {
-            apiPath: SILA_PATHS.CHECK_KYC,
+            apiPath: SILA_PATHS.UPDATE,
             data: {
+                type: SILA_UPDATE_TYPES.ENTITY,
                 userHandle: USER_HANDLE,
-                email: EMAIL
+                email: EMAIL,
+                updateBody: {
+                    birthdate: BIRTHDATE
+                }
             }
         }
 

@@ -5,11 +5,11 @@ const util = require('util');
 const readFile = util.promisify(fs.readFile);
 
 // local packages
-const { silaAPI } = require('../index');
+const { silaAPI } = require('../../index');
 
 // consts
-const { SILA_PATHS } = require('../src/routes/index');
-const { SILA_UPDATE_TYPES } = require('../src/routes/entities/update');
+const { SILA_PATHS } = require('../../src/routes/index');
+const { SILA_UPDATE_TYPES } = require('../../src/routes/entities/update');
 const {
     EMAIL,
     ADDRESS_ALIAS,
@@ -19,7 +19,7 @@ const {
     POSTAL_CODE,
     SSN,
     PHONE
-} = require('./consts');
+} = require('../consts');
 
 
 describe('tests Sila API integration', () => {
