@@ -11,7 +11,7 @@ const { silaAPI } = require('../../index');
 const { SILA_PATHS } = require('../../src/routes/index');
 
 describe('tests Sila API integration', () => {
-    it.only('should /get_entity on an individual', async () => {
+    it('should /get_entity on an individual', async () => {
         // imitates retrieving the user handle from your database
         const userInfo = await readFile('./userInfo.json', 'utf8')
         const parsedData = JSON.parse(userInfo);
