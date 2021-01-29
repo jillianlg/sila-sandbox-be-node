@@ -9,7 +9,6 @@ const { silaAPI } = require('../../index');
 
 // consts
 const { SILA_PATHS } = require('../../src/routes/index');
-const { EMAIL } = require('../consts');
 
 describe('tests Sila API integration', () => {
     it('should /check_kyc', async () => {
@@ -23,7 +22,6 @@ describe('tests Sila API integration', () => {
             apiPath: SILA_PATHS.CHECK_KYC,
             data: {
                 userHandle: USER_HANDLE,
-                email: EMAIL
             }
         }
 
