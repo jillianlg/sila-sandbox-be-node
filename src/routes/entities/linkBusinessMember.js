@@ -1,8 +1,8 @@
 // third party packages
 const axios = require('axios');
 const fs = require('fs');
-const { promisfy } = require('util');
-const readFile = promisfy(fs.readFile);
+const { promisify } = require('util');
+const readFile = promisify(fs.readFile);
 
 // local packages
 const { encryptMessage, decryptPrivateKey } = require('../../utils');
@@ -17,24 +17,34 @@ const SILA_BUSINESS_USER_ROLES = {
 
 }
 
+/**
+ * links an individual entity to a business entity as a business member
+ * @param data.adminIsLinking [required true if the user performing the link is an admin]
+ * @param data.adminUserHandle [required if the user performing the link is an admin] handle of the admin user
+ * @param data.businessHandle [required] handle of the business to which the link is being made
+ * @param data.userHandle [required] handle of the user to be linked
+ * @param data.role [required] role of the business member
+ * @param data.ownership_stake [required if role is "beneficial owner"] float (0 < n <= 100)
+ * @param data.details [optional] string containing whatever details desired
+ */
 async function linkBusinessMember(data) {
-    const member_handle = data.adminIsLinking ? data.adminUserHandle : data.userHandle;
+    const userHandle = data.adminIsLinking ? data.adminUserHandle : data.userHandle;
 
     // prepare the request body
     const body = {
         header: {
             created: Math.floor(Date.now() / 1000),
             auth_handle: APP_HANDLE,
-            user_handle: member_handle,
+            user_handle: userHandle,
             business_handle: data.businessHandle,
             reference: 'ref'
         },
-        member_handle
+        role: data.role
     }
 
-    if(data.role) body.role = data.role;
+
+    if(data.adminIsLinking) body.member_handle = data.userHandle;
     if(data.role === SILA_BUSINESS_USER_ROLES.BENEFICIAL_OWNER) body.ownership_stake = data.ownership_stake;
-    if(data.roleUUID) body.role_uuid = data.roleUUID;
     if(data.details) body.details = data.details;
 
     // imitates retrieving the user's private key from your KMS

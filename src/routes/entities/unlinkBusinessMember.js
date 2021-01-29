@@ -1,8 +1,8 @@
 // third party packages
 const axios = require('axios');
 const fs = require('fs');
-const { promisfy } = require('util');
-const readFile = promisfy(fs.readFile);
+const { promisify } = require('util');
+const readFile = promisify(fs.readFile);
 
 // local packages
 const { encryptMessage, decryptPrivateKey } = require('../../utils');
@@ -10,12 +10,15 @@ const { encryptMessage, decryptPrivateKey } = require('../../utils');
 // consts
 const { APP_PRIVATE_KEY, APP_HANDLE } = require('../../../.env');
 const { SILA_URLS } = require('../../consts');
-const SILA_BUSINESS_USER_ROLES = {
-    ADMIN: 'administrator',
-    BENEFICIAL_OWNER: 'beneficial_owner',
-    CONTROLLING_OFFICER: 'controlling_officer',
 
-}
+/**
+ * removes the link between an individual entity to a business entity as a business member
+ * @param data.adminIsLinking [required true if the user performing the link is an admin]
+ * @param data.adminUserHandle [required if the user performing the link is an admin] handle of the admin user
+ * @param data.businessHandle [required] handle of the business to which the link is being made
+ * @param data.userHandle [required] handle of the user to be linked
+ * @param data.role [optional] if included will only remove specified role
+ */
 
 async function unlinkBusinessMember(data) {
     const member_handle = data.adminIsLinking ? data.adminUserHandle : data.userHandle;
@@ -29,13 +32,10 @@ async function unlinkBusinessMember(data) {
             business_handle: data.businessHandle,
             reference: 'ref'
         },
-        member_handle
     }
 
+    if(data.adminIsLinking) body.member_handle = data.userHandle;
     if(data.role) body.role = data.role;
-    if(data.role === SILA_BUSINESS_USER_ROLES.BENEFICIAL_OWNER) body.ownership_stake = data.ownership_stake;
-    if(data.roleUUID) body.role_uuid = data.roleUUID;
-    if(data.details) body.details = data.details;
 
     // imitates retrieving the user's private key from your KMS
     // * if an admin is linking the member, the user in /userInfo.json must be the admin

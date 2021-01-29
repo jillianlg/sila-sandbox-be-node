@@ -11,6 +11,10 @@ const { APP_PRIVATE_KEY, APP_HANDLE } = require('../../../.env');
 // consts
 const { SILA_URLS } = require('../../consts');
 
+/**
+ * requests KYC for specified user
+ * @param data.userHandle [required] user to recieve KYC request
+ */
 async function requestKYC(data) {
     // prepare the request body
     const body = {

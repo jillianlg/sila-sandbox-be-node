@@ -15,13 +15,36 @@ const { APP_HANDLE, APP_PRIVATE_KEY } = require('../../../.env');
 // NOTE: This only registers a user with Sila. It does not handle login informtion.
 // You will need to create a separate login structure for your app.
 
+/**
+ * registers a user with sila
+ * @param userInfo.entity.type [optional] either "business" or "individual". Will default to "individual" if excluded
+ * @param userInfo.entity.birthdate [optional] birthdate of the individual. must be YYYY-MM-DD
+ * @param userInfo.entity.entity_name [required if business] the name of the entity
+ * @param userInfo.entity.first_name [required if individual]
+ * @param userInfo.entity.last_name [required if individual]
+ * 
+ * @param userInfo.address.address_alias [optional] nickname for address
+ * @param userInfo.address.street_address_1 [optional] street address first line
+ * @param userInfo.address.street_address_2 [optional] street address second line
+ * @param userInfo.address.city
+ * @param userInfo.address.state [optiona] in the format XX using standard state abbreviation
+ * @param userInfo.address.country [optional] only option is "US" for now
+ * @param userInfo.address.postal_code [optional] accepts both ##### and #####-#### formats
+ * 
+ * @param userInfo.identity.identity_alias [optional] only options are "SSN" or "EIN"
+ * @param userInfo.identity.identity_value [optional] must be valid SSN or EIN
+ * 
+ * @param userInfo.contact.phone [optional] must be ###-###-#### format
+ * @param userInfo.contact.contact_alias [optional] nickname for contact
+ * @param userInfo.contact.email [optional] must match standard email format
+ */
 async function register(userInfo) {
     console.log('userInfo: ', userInfo);
     // create the user handle
     const uuid = v4();
     let USER_HANDLE;
     if(userInfo.entity.type === 'business') {
-        const flattenedBusinessName = userInfo.entity.entity_name.replace(/ /g, "-");
+        const flattenedBusinessName = userInfo.entity.entity_name.replace(/ /g, "_");
         USER_HANDLE = `${APP_HANDLE}.${flattenedBusinessName}.${uuid}`;
     } else {
         USER_HANDLE = `${APP_HANDLE}.${userInfo.entity.first_name}.${userInfo.entity.last_name}.${uuid}`;
@@ -30,7 +53,6 @@ async function register(userInfo) {
     // create the wallet
     const wallet = createWallet();
 
-    // NOTE: As is, this will only register a user with the required fields
     // See https://docs.silamoney.com/docs/register for further endpoint details
     const body = {
         header: {

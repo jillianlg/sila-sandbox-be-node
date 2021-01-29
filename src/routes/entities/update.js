@@ -6,7 +6,6 @@ const readFile = util.promisify(fs.readFile);
 
 // local packages
 const { encryptMessage, decryptPrivateKey } = require('../../utils');
-const { getEntity } = require('./getEntity');
 
 // consts
 const { SILA_URLS } = require('../../consts');
@@ -20,6 +19,14 @@ const SILA_UPDATE_TYPES = {
     ENTITY: 'entity'
 }
 
+/**
+ * updates pre-existing user information
+ * @param data.userHandle [required] the handle of the user to be updated
+ * @param data.type [required] the type of the information object to be updated
+ * @param data.uuid [required for all but email] the uuid of the information object to be updated
+ * @param data.updateBody [required] must match the format of the data type being added
+ *  * see /register for additional details
+ */
 async function update(data) {
     // prepare the request body
     const body = {
@@ -38,21 +45,9 @@ async function update(data) {
  
     
     if(!USER_PRIVATE_KEY) return new Error('No user found');
-    
-    // retrieve the user's uuid from getEntity
-    const response = await getEntity({
-        userHandle: data.userHandle,
-        email: data.email
-    });
-
-    if(response.status !== 200) return new Error('entity not found');
-    
-    const entity = response.data;
 
     // if anything but entity is being updated, a uuid is needed
-    if(data.type !== SILA_UPDATE_TYPES.ENTITY) {
-        body.uuid = entity[SILA_UPDATE_TYPES[data.type]][0].uuid;
-    }
+    if(data.uuid) body.uuid = data.uuid;
 
     // add all update fields to the body, to avoid over-writing data with empty strings
     for(const key of Object.keys(data.updateBody)) {

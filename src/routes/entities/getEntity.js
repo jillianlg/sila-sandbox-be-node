@@ -11,6 +11,10 @@ const { encryptMessage, decryptPrivateKey } = require('../../utils');
 const { APP_PRIVATE_KEY, APP_HANDLE } = require('../../../.env');
 const { SILA_URLS } = require('../../consts');
 
+/**
+ * retrieves user information for specified user
+ * @param data.userHandle [required] the entity to be queried 
+ */
 async function getEntity(data) {
     // prepare the request body
     const body = {

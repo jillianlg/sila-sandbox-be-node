@@ -8,13 +8,16 @@ const { encryptMessage } = require('../../utils');
 const { APP_PRIVATE_KEY, APP_HANDLE } = require('../../../.env');
 const { SILA_URLS } = require('../../consts');
 
+/**
+ * retrieves all entities associated with an app
+ * @param data.entityType [optional] can be "individual" or "business". If excluded, will return all entities
+ */
 async function getEntities(data) {
     // prepare the request body
     const body = {
         header: {
             created: Math.floor(Date.now() / 1000),
             auth_handle: APP_HANDLE,
-            user_handle: data.userHandle,
             reference: 'ref',
         },
         message: "header_msg",

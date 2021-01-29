@@ -11,6 +11,14 @@ const { encryptMessage, decryptPrivateKey } = require('../../utils');
 const { SILA_URLS } = require('../../consts');
 const { APP_PRIVATE_KEY, APP_HANDLE } = require('../../../.env');
 
+/**
+ * deletes an information object associated with a user
+ * @param data.userHandle [required] the handle of the user to be updated
+ * @param data.type [required] the type of the information object to be updated
+ * @param data.uuid [required for all but email] the uuid of the information object to be updated
+ *  * see /register for additional details
+ */
+
 async function deleteUserInfo(data) {
     // prepare the request body
     const body = {

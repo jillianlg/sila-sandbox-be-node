@@ -1,8 +1,8 @@
 // third party packages
 const axios = require('axios');
 const fs = require('fs');
-const { promisfy } = require('util');
-const readFile = promisfy(fs.readFile);
+const { promisify } = require('util');
+const readFile = promisify(fs.readFile);
 
 // local packages
 const { encryptMessage, decryptPrivateKey } = require('../../utils');
@@ -11,6 +11,11 @@ const { encryptMessage, decryptPrivateKey } = require('../../utils');
 const { APP_PRIVATE_KEY, APP_HANDLE } = require('../../../.env');
 const { SILA_URLS } = require('../../consts');
 
+/**
+ * certifies a business
+ * @param data.adminHandle [required] the handle of the admin performing the certification
+ * @param data.businessHandle [required] the handle of the business to be certified
+ */
 async function certifyBusiness(data) {
     // prepare the request body
     const body = {

@@ -1,8 +1,8 @@
 // third party packages
 const axios = require('axios');
 const fs = require('fs');
-const { promisfy } = require('util');
-const readFile = promisfy(fs.readFile);
+const { promisify } = require('util');
+const readFile = promisify(fs.readFile);
 
 // local packages
 const { encryptMessage, decryptPrivateKey } = require('../../utils');
@@ -11,6 +11,13 @@ const { encryptMessage, decryptPrivateKey } = require('../../utils');
 const { APP_PRIVATE_KEY, APP_HANDLE } = require('../../../.env');
 const { SILA_URLS } = require('../../consts');
 
+/**
+ * certifies an individual entity as a beneficial owner of a business entity
+ * @param data.adminHandle [required] the admin performing the certification
+ * @param data.businessHandle [required] the handle of the business associated with the certification
+ * @param data.userHandle [required] the handle of the individual being certified
+ * @param data.certificationToken [required] the certification token required for certification (retrieved from /get_entity on user)
+ */
 async function certifyBeneficialOwner(data) {
     // prepare the request body
     const body = {

@@ -8,6 +8,10 @@ const { encryptMessage } = require('../../utils');
 const { APP_PRIVATE_KEY, APP_HANDLE } = require('../../../.env');
 const { SILA_URLS } = require('../../consts');
 
+/**
+ * checks whether the submitted user handle is available for registration
+ * @param data.userHandle the handle to be checked
+ */
 async function checkHandle(data) {
     // prepare the request body
     const body = {
