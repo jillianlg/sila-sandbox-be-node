@@ -1,10 +1,14 @@
 // change these variables as needed
 
+// individual
 const FIRST_NAME = 'Firstname';
 const LAST_NAME = 'Lastname';
 const EMAIL = 'email@email.com';
 
+// business
 const ENTITY_NAME = 'BusinessName';
+const BUSINESS_TYPE = 'corporation';
+const NAICS_CODE = 721;
 
 const ADDRESS_ALIAS = 'Home';
 const STREET_ADDRESS_1 = 'Street Address';
@@ -23,6 +27,8 @@ module.exports = {
     LAST_NAME,
     EMAIL,
     ENTITY_NAME,
+    BUSINESS_TYPE,
+    NAICS_CODE,
     ADDRESS_ALIAS,
     STREET_ADDRESS_1,
     CITY,

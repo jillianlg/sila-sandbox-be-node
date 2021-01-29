@@ -10,10 +10,12 @@ const {
     FIRST_NAME,
     LAST_NAME,
     ENTITY_NAME,
+    BUSINESS_TYPE,
+    NAICS_CODE
 } = require('../consts');
 
 describe('tests Sila API integration', () => {
-    it('should /register an individual with use of "entity.type"', async () => {
+    it.skip('should /register an individual with use of "entity.type"', async () => {
     
     const userInfo = {
         entity: {
@@ -30,13 +32,14 @@ describe('tests Sila API integration', () => {
 
         const jsonBody = JSON.stringify(body);
         const response = await silaAPI({ body: jsonBody });
-        console.log('response: ', response);
         const parsedResponse = JSON.parse(response.body);
+        
+        console.log('parsedResponse: ', parsedResponse);
 
         expect(parsedResponse.success).to.equal(true);
     });
     
-    it('should /register an individual with absence of "entity.type"', async () => {
+    it.skip('should /register an individual with absence of "entity.type"', async () => {
     
     const userInfo = {
         entity: {
@@ -47,33 +50,39 @@ describe('tests Sila API integration', () => {
 
     const body = {
             apiPath: SILA_PATHS.REGISTER,
-            userInfo
+            data: userInfo
         }
 
         const jsonBody = JSON.stringify(body);
         const response = await silaAPI({ body: jsonBody });
         const parsedResponse = JSON.parse(response.body);
 
+        console.log('parsedResponse: ', parsedResponse);
+
         expect(parsedResponse.success).to.equal(true);
     });
     
-    it('should /register a business', async () => {
+    it.skip('should /register a business', async () => {
     
-    const userInfo = {
+    const businessInfo = {
         entity: {
             type: 'business',
             entity_name: ENTITY_NAME,
+            business_type: BUSINESS_TYPE,
+            naics_code: NAICS_CODE,
         }
     }
 
     const body = {
             apiPath: SILA_PATHS.REGISTER,
-            userInfo
+            data: businessInfo
         }
 
         const jsonBody = JSON.stringify(body);
         const response = await silaAPI({ body: jsonBody });
         const parsedResponse = JSON.parse(response.body);
+
+        console.log('parsedResponse: ', parsedResponse);
 
         expect(parsedResponse.success).to.equal(true);
     });
