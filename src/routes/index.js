@@ -1,4 +1,5 @@
-// routes
+// ROUTES
+// entities
 const { checkHandle } = require('./entities/checkHandle');
 const { register } = require('./entities/register');
 const { add } = require('./entities/add');
@@ -13,7 +14,11 @@ const { certifyBusiness } = require('./entities/certifyBusiness');
 const { getEntities } = require('./entities/getEntities');
 const { getEntity } = require('./entities/getEntity');
 
+// parameters
+const { getBusinessTypes } = require('./parameters/getBusinessTypes');
+
 const SILA_PATHS = {
+    // entities
     CHECK_HANDLE: 'CHECK_HANDLE',
     REGISTER: 'REGISTER',
     ADD: 'ADD',
@@ -27,9 +32,13 @@ const SILA_PATHS = {
     CERTIFY_BUSINESS: 'CERTIFY_BUSINESS',
     GET_ENTITIES: 'GET_ENTITIES',
     GET_ENTITY: 'GET_ENTITY',
+
+    // parameters
+    GET_BUSINESS_TYPES: 'GET_BUSINESS_TYPES',
 }
 
 const SILA_ROUTES = {
+    // entities
     [SILA_PATHS.CHECK_HANDLE]: checkHandle,
     [SILA_PATHS.REGISTER]: register,
     [SILA_PATHS.ADD]: add  ,
@@ -43,6 +52,9 @@ const SILA_ROUTES = {
     [SILA_PATHS.CERTIFY_BUSINESS]: certifyBusiness,
     [SILA_PATHS.GET_ENTITY]: getEntity,
     [SILA_PATHS.GET_ENTITIES]: getEntities,
+
+    // parameters
+    [SILA_PATHS.GET_BUSINESS_TYPES]: getBusinessTypes,
 }
 
 module.exports = {

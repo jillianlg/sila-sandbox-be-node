@@ -1,6 +1,7 @@
 // sila
 const SILA_BASE_SANDBOX_URL = 'https://sandbox.silamoney.com/0.2';
 const SILA_URLS = {
+    // entities
     CHECK_HANDLE: `${SILA_BASE_SANDBOX_URL}/check_handle`,
     REGISTER_USER: `${SILA_BASE_SANDBOX_URL}/register`,
     ADD: `${SILA_BASE_SANDBOX_URL}/add/`,
@@ -14,6 +15,9 @@ const SILA_URLS = {
     CERTIFY_BUSINESS: `${SILA_BASE_SANDBOX_URL}/certify_business`,
     GET_ENTITIES: `${SILA_BASE_SANDBOX_URL}/get_entities`,
     GET_ENTITY: `${SILA_BASE_SANDBOX_URL}/get_entity`,
+
+    // parameters
+    GET_BUSINESS_TYPES: `${SILA_BASE_SANDBOX_URL}/get_business_types`,
 }
 
 module.exports = {
