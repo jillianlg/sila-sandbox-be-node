@@ -78,21 +78,8 @@ async function register(entityInfo) {
     // ** THIS IS NOT A SECURE METHOD TO DO SO **
     // ** DO NOT USE THIS METHOD UNDER ANY CIRCUMSTANCES FOR ANYTHING OTHER THAN TESTING **
     // ** NEVER COMMIT OR SHARE PRIVATE KEYS **
-
-    // NOTE: this will OVERWRITE the .json file every time it is run
-    /**
-     * You will need to manually save encrypted private keys
-     * and user handles for testing endpoints
-     * that involve more than one user
-     */
-
-    // the type will default to 'individual' if not provided
-    let entityFileName = 'userInfo.json';
-    if((entityInfo.entity.type) && (entityInfo.entity.type === 'business')) {
-        entityFileName = 'businessInfo.json';
-    }
-
-     const KMSEntityInfo = JSON.stringify({
+    const entityFileName = `${USER_HANDLE}.info.json`;
+    const KMSEntityInfo = JSON.stringify({
         USER_HANDLE,
         USER_PRIVATE_KEY: encryptPrivateKey(wallet.privateKey)
     });

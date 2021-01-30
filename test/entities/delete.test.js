@@ -1,8 +1,5 @@
 // third party packages
 const { expect } = require('chai');
-const fs = require('fs');
-const util = require('util');
-const readFile = util.promisify(fs.readFile);
 
 // local packages
 const { silaAPI } = require('../../index');
@@ -13,53 +10,46 @@ const { SILA_PATHS } = require('../../src/routes/index');
 const SILA_DELETE_TYPES = {
     EMAIL: 'email',
     PHONE: 'phone',
-    ID: 'identity',
+    IDENTITY: 'identity',
     ADDRESS: 'address',
 }
+const {
+    USER_HANDLE_INDIVIDUAL_ONE,
+    UUID_INDIVIDUAL_EMAIL,
+    UUID_INDIVIDUAL_ADDRESS,
+    UUID_INDIVIDUAL_PHONE,
+    UUID_INDIVIDUAL_IDENTITY,
+} = require('../../.env');
 
-// NOTE: You will need to use /get_entity in order to retrieve the UUIDs needed for these tests
-
-describe('tests Sila API integration', () => {
+describe.skip('tests Sila API integration', () => {
     it('should /delete/email', async () => {
-        const EMAIL_UUID = '[GET EMAIL UUID FROM /get_entity]'
-        
-        // imitates retrieving the user handle from your database
-        const userInfo = await readFile('./userInfo.json',  'utf8')
-        const parsedData = JSON.parse(userInfo);
-        const { USER_HANDLE } = parsedData;
-        
         // prepare the request body
         const body = {
-            apiPath: SILA_PATHS.UPDATE,
+            apiPath: SILA_PATHS.DELETE,
             data: {
                 type: SILA_DELETE_TYPES.EMAIL,
-                userHandle: USER_HANDLE,
-                uuid: EMAIL_UUID,
+                userHandle: USER_HANDLE_INDIVIDUAL_ONE,
+                uuid: UUID_INDIVIDUAL_EMAIL,
             }
         }
 
         const jsonBody = JSON.stringify(body);
         const response = await silaAPI({ body: jsonBody });
         const parsedResponse = JSON.parse(response.body);
+
+        console.log('parsedResponse: ', parsedResponse);
 
         expect(parsedResponse.success).to.equal(true);
     });
 
     it('should /delete/phone', async () => {
-        const PHONE_UUID = '[GET PHONE UUID FROM /get_entity]'
-        
-        // imitates retrieving the user handle from your database
-        const userInfo = await readFile('./userInfo.json',  'utf8')
-        const parsedData = JSON.parse(userInfo);
-        const { USER_HANDLE } = parsedData;
-        
         // prepare the request body
         const body = {
-            apiPath: SILA_PATHS.UPDATE,
+            apiPath: SILA_PATHS.DELETE,
             data: {
                 type: SILA_DELETE_TYPES.PHONE,
-                userHandle: USER_HANDLE,
-                uuid: PHONE_UUID,
+                userHandle: USER_HANDLE_INDIVIDUAL_ONE,
+                uuid: UUID_INDIVIDUAL_PHONE,
             }
         }
 
@@ -67,53 +57,47 @@ describe('tests Sila API integration', () => {
         const response = await silaAPI({ body: jsonBody });
         const parsedResponse = JSON.parse(response.body);
 
+        console.log('parsedResponse: ', parsedResponse);
+
         expect(parsedResponse.success).to.equal(true);
     });
+
     it('should /delete/identity', async () => {
-        const IDENTITY_UUID = '[GET IDENTITY UUID FROM /get_entity]'
-        
-        // imitates retrieving the user handle from your database
-        const userInfo = await readFile('./userInfo.json',  'utf8')
-        const parsedData = JSON.parse(userInfo);
-        const { USER_HANDLE } = parsedData;
-        
         // prepare the request body
         const body = {
-            apiPath: SILA_PATHS.UPDATE,
+            apiPath: SILA_PATHS.DELETE,
             data: {
                 type: SILA_DELETE_TYPES.IDENTITY,
-                userHandle: USER_HANDLE,
-                uuid: IDENTITY_UUID,
+                userHandle: USER_HANDLE_INDIVIDUAL_ONE,
+                uuid: UUID_INDIVIDUAL_IDENTITY,
             }
         }
 
         const jsonBody = JSON.stringify(body);
         const response = await silaAPI({ body: jsonBody });
         const parsedResponse = JSON.parse(response.body);
+
+        console.log('parsedResponse: ', parsedResponse);
 
         expect(parsedResponse.success).to.equal(true);
     });
+
     it('should /delete/address', async () => {
-        const ADDRESS_UUID = '[GET ADDRESS UUID FROM /get_entity]'
-        
-        // imitates retrieving the user handle from your database
-        const userInfo = await readFile('./userInfo.json',  'utf8')
-        const parsedData = JSON.parse(userInfo);
-        const { USER_HANDLE } = parsedData;
-        
         // prepare the request body
         const body = {
-            apiPath: SILA_PATHS.UPDATE,
+            apiPath: SILA_PATHS.DELETE,
             data: {
                 type: SILA_DELETE_TYPES.ADDRESS,
-                userHandle: USER_HANDLE,
-                uuid: ADDRESS_UUID,
+                userHandle: USER_HANDLE_INDIVIDUAL_ONE,
+                uuid: UUID_INDIVIDUAL_ADDRESS,
             }
         }
 
         const jsonBody = JSON.stringify(body);
         const response = await silaAPI({ body: jsonBody });
         const parsedResponse = JSON.parse(response.body);
+
+        console.log('parsedResponse: ', parsedResponse);
 
         expect(parsedResponse.success).to.equal(true);
     });

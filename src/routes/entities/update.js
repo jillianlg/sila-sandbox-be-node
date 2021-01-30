@@ -23,7 +23,7 @@ const SILA_UPDATE_TYPES = {
  * updates pre-existing user information
  * @param data.userHandle [required] the handle of the user to be updated
  * @param data.type [required] the type of the information object to be updated
- * @param data.uuid [required for all but email] the uuid of the information object to be updated
+ * @param data.uuid [required for all but entity] the uuid of the information object to be updated
  * @param data.updateBody [required] must match the format of the data type being added
  *  * see /register for additional details
  */
@@ -37,15 +37,14 @@ async function update(data) {
         },
     }
 
-     // imitates retrieving the user's private key from your KMS
-     const userInfo = await readFile('./userInfo.json', 'utf8')
-     const parsedUserInfo = JSON.parse(userInfo);
-     const encryptedPrivateKey = parsedUserInfo.USER_PRIVATE_KEY;
-     const USER_PRIVATE_KEY = decryptPrivateKey(encryptedPrivateKey);
+     // imitates retrieving the entity's private key from your KMS
+     const entityInfo = await readFile(`./${data.userHandle}.info.json`, 'utf8')
+     const parsedEntityInfo = JSON.parse(entityInfo);
+     const encryptedPrivateKey = parsedEntityInfo.USER_PRIVATE_KEY;
+     const ENTITY_PRIVATE_KEY = decryptPrivateKey(encryptedPrivateKey);
  
-    
-    if(!USER_PRIVATE_KEY) return new Error('No user found');
-
+     if(!ENTITY_PRIVATE_KEY) return new Error('No user found');
+ 
     // if anything but entity is being updated, a uuid is needed
     if(data.uuid) body.uuid = data.uuid;
 
@@ -57,7 +56,7 @@ async function update(data) {
     // generate authorization headers
     const appPrivateKey = APP_PRIVATE_KEY;
     const authSignature = encryptMessage(appPrivateKey, body);
-    const userSignature = encryptMessage(USER_PRIVATE_KEY, body);
+    const userSignature = encryptMessage(ENTITY_PRIVATE_KEY, body);
 
     const headers = {
         authsignature: authSignature,

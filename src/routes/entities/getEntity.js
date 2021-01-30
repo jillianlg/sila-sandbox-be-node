@@ -25,17 +25,17 @@ async function getEntity(data) {
         }
     }
 
-     // imitates retrieving the user's private key from your KMS
-     const userInfo = await readFile('./userInfo.json', 'utf8')
-     const parsedUserInfo = JSON.parse(userInfo);
-     const encryptedPrivateKey = parsedUserInfo.USER_PRIVATE_KEY;
-     const USER_PRIVATE_KEY = decryptPrivateKey(encryptedPrivateKey);
- 
-    if(!USER_PRIVATE_KEY) return new Error('No user found');    
+    // imitates retrieving the entity's private key from your KMS
+    const entityInfo = await readFile(`./${data.userHandle}.info.json`, 'utf8')
+    const parsedEntityInfo = JSON.parse(entityInfo);
+    const encryptedPrivateKey = parsedEntityInfo.USER_PRIVATE_KEY;
+    const ENTITY_PRIVATE_KEY = decryptPrivateKey(encryptedPrivateKey);
+
+    if(!ENTITY_PRIVATE_KEY) return new Error('No user found');
 
     // generate authorization headers
     const authSignature = encryptMessage(APP_PRIVATE_KEY, body);
-    const userSignature = encryptMessage(USER_PRIVATE_KEY, body);
+    const userSignature = encryptMessage(ENTITY_PRIVATE_KEY, body);
 
     const headers = {
         authsignature: authSignature,

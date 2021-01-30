@@ -8,8 +8,8 @@ const { silaAPI } = require('../../index');
 // consts
 const { SILA_PATHS } = require('../../src/routes/index');
 
-describe('tests Sila API integration', () => {
-    it.skip('/check_handle: handle is available', async () => {
+describe.skip('tests Sila API integration', () => {
+    it('/check_handle: handle is available', async () => {
         const handleToCheck = v4();
         
         // prepare the request body
@@ -29,7 +29,7 @@ describe('tests Sila API integration', () => {
         expect(parsedResponse.success).to.equal(true);
     });
 
-    it.skip('/check_handle: handle is unavailable', async () => {        
+    it('/check_handle: handle is unavailable', async () => {        
         // prepare the request body
         const body = {
             apiPath: SILA_PATHS.CHECK_HANDLE,

@@ -20,6 +20,8 @@ const PHONE = '1112223333';
 
 const SSN = '111223333';
 
+const EIN = '123456789';
+
 const BIRTHDATE = '1990-02-28';
 
 module.exports = {
@@ -36,5 +38,6 @@ module.exports = {
     POSTAL_CODE,
     PHONE,
     SSN,
+    EIN,
     BIRTHDATE
 }

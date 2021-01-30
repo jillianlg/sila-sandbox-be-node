@@ -23,7 +23,7 @@ async function getEntities(data) {
         message: "header_msg",
     }
 
-    if(data.entityType) body.entity_type = data.entityType;
+    if(data && data.entityType) body.entity_type = data.entityType;
 
     // generate authorization headers
     const authSignature = encryptMessage(APP_PRIVATE_KEY, body);
