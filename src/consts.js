@@ -18,6 +18,7 @@ const SILA_URLS = {
 
     // parameters
     GET_BUSINESS_TYPES: `${SILA_BASE_SANDBOX_URL}/get_business_types`,
+    GET_BUSINESS_ROLES: `${SILA_BASE_SANDBOX_URL}/get_business_roles`,
 }
 
 module.exports = {

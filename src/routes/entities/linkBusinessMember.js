@@ -39,9 +39,8 @@ async function linkBusinessMember(data) {
             business_handle: data.businessHandle,
             reference: 'ref'
         },
-        role: data.role
+        role: data.role,
     }
-
 
     if(data.adminIsLinking) body.member_handle = data.userHandle;
     if(data.role === SILA_BUSINESS_USER_ROLES.BENEFICIAL_OWNER) body.ownership_stake = data.ownership_stake;
@@ -52,7 +51,7 @@ async function linkBusinessMember(data) {
     // * if an admin is NOT linking the member, the user in /userInfo.json must be the user to be linked
     // * you can also manually create a /adminInfo.json file and use it here
     // ** DO NOT EVER COMMIT FILES THAT CONTAIN PRIVATE KEYS **
-     const userInfo = await readFile('./userInfo.json', 'utf8')
+     const userInfo = await readFile(`./${userHandle}.info.json`, 'utf8')
      const parsedUserInfo = JSON.parse(userInfo);
      const encryptedUserPrivateKey = parsedUserInfo.USER_PRIVATE_KEY;
      const USER_PRIVATE_KEY = decryptPrivateKey(encryptedUserPrivateKey);
@@ -60,8 +59,8 @@ async function linkBusinessMember(data) {
     if(!USER_PRIVATE_KEY) return new Error('No user found');    
 
     // imitates retrieving the business' private key from your KMS
-     const businessInfo = await readFile('./userInfo.json', 'utf8')
-     const parsedBusinessInfo = JSON.parse(businessInfo);
+    const businessInfo = await readFile(`./${data.businessHandle}.info.json`, 'utf8')
+    const parsedBusinessInfo = JSON.parse(businessInfo);
      const encryptedBusinessPrivateKey = parsedBusinessInfo.USER_PRIVATE_KEY;
      const BUSINESS_PRIVATE_KEY = decryptPrivateKey(encryptedBusinessPrivateKey);
     

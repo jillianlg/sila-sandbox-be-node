@@ -16,6 +16,7 @@ const { getEntity } = require('./entities/getEntity');
 
 // parameters
 const { getBusinessTypes } = require('./parameters/getBusinessTypes');
+const { getBusinessRoles } = require('./parameters/getBusinessRoles');
 
 const SILA_PATHS = {
     // entities
@@ -35,6 +36,7 @@ const SILA_PATHS = {
 
     // parameters
     GET_BUSINESS_TYPES: 'GET_BUSINESS_TYPES',
+    GET_BUSINESS_ROLES: 'GET_BUSINESS_ROLES',
 }
 
 const SILA_ROUTES = {
@@ -55,6 +57,7 @@ const SILA_ROUTES = {
 
     // parameters
     [SILA_PATHS.GET_BUSINESS_TYPES]: getBusinessTypes,
+    [SILA_PATHS.GET_BUSINESS_ROLES]: getBusinessRoles,
 }
 
 module.exports = {

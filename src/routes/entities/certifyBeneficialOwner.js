@@ -66,7 +66,7 @@ async function certifyBeneficialOwner(data) {
     try {
         return await axios({
             method: 'post',
-            url: SILA_URLS.LINK_BUSINESS_MEMBER,
+            url: SILA_URLS.CERTIFY_BENEFICIAL_OWNER,
             headers: headers,
             data: body,
             validateStatus: () => { return true }
