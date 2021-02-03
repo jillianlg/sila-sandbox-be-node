@@ -9,31 +9,12 @@ const { SILA_PATHS } = require('../../src/routes/index');
 const { USER_HANDLE_INDIVIDUAL_ONE } = require('../../.env');
 
 describe('tests Sila API integration', () => {
-    it('/link_account automated auth', async () => {
+    it.only('/link_account automated auth', async () => {
         // prepare the request body
         const body = {
             apiPath: SILA_PATHS.LINK_ACCOUNT,
             data: {
                 userHandle: USER_HANDLE_INDIVIDUAL_ONE,
-            },
-        }
-
-        const jsonBody = JSON.stringify(body);
-        const response = await silaAPI({ body: jsonBody });
-        const parsedResponse = JSON.parse(response.body);
-
-        console.log('parsedResponse: ', parsedResponse);
-
-        expect(parsedResponse.success).to.equal(true);
-    }).timeout(10000);
-    
-    it('/link_account microdeposit auth', async () => {
-        // prepare the request body
-        const body = {
-            apiPath: SILA_PATHS.LINK_ACCOUNT,
-            data: {
-                userHandle: USER_HANDLE_INDIVIDUAL_ONE,
-                isMicroDeposit: true
             },
         }
 

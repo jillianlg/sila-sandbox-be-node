@@ -28,7 +28,7 @@ async function linkAccount(data) {
         }
     }
 
-    const plaidInstantAuthBody = {
+    const plaidRequestBody = {
         public_key: 'fa9dd19eb40982275785b09760ab79',
         initial_products: ['transactions'],
         institution_id: 'ins_109508',
@@ -37,19 +37,6 @@ async function linkAccount(data) {
             password: 'pass_good',
         }
     }
-
-    const plaidMicrodepositBody = {
-        public_key: 'fa9dd19eb40982275785b09760ab79',
-        initial_products: ['auth'],
-        institution_id: 'ins_109508',
-        credentials: {
-            username: 'user_good',
-            password: 'pass_good',
-        }
-    }
-
-    const plaidRequestBody = data.isMicroDeposit ? plaidMicrodepositBody : plaidInstantAuthBody;
-
     // get the plaid token
     const response = await axios({
         method: 'post',
@@ -57,8 +44,6 @@ async function linkAccount(data) {
         data: plaidRequestBody,
         validateStatus: () => { return true }
     });
-
-    console.log('response: ', response);
 
     body.public_token = response.data.public_token;
 
