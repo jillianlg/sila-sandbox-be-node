@@ -16,6 +16,11 @@ const SILA_URLS = {
     GET_ENTITIES: `${SILA_BASE_SANDBOX_URL}/get_entities`,
     GET_ENTITY: `${SILA_BASE_SANDBOX_URL}/get_entity`,
 
+    // acounts
+    LINK_ACCOUNT: `${SILA_BASE_SANDBOX_URL}/link_account`,
+    GET_ACCOUNTS: `${SILA_BASE_SANDBOX_URL}/get_accounts`,
+    GET_ACCOUNT_BALANCE: `${SILA_BASE_SANDBOX_URL}/get_account_balance`,
+
     // parameters
     GET_BUSINESS_TYPES: `${SILA_BASE_SANDBOX_URL}/get_business_types`,
     GET_BUSINESS_ROLES: `${SILA_BASE_SANDBOX_URL}/get_business_roles`,

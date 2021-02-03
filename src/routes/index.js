@@ -14,6 +14,11 @@ const { certifyBusiness } = require('./entities/certifyBusiness');
 const { getEntities } = require('./entities/getEntities');
 const { getEntity } = require('./entities/getEntity');
 
+// accounts
+const { linkAccount } = require('./accounts/linkAccount');
+const { getAccounts } = require('./accounts/getAccounts');
+const { getAccountBalance } = require('./accounts/getAccountBalance');
+
 // parameters
 const { getBusinessTypes } = require('./parameters/getBusinessTypes');
 const { getBusinessRoles } = require('./parameters/getBusinessRoles');
@@ -33,6 +38,11 @@ const SILA_PATHS = {
     CERTIFY_BUSINESS: 'CERTIFY_BUSINESS',
     GET_ENTITIES: 'GET_ENTITIES',
     GET_ENTITY: 'GET_ENTITY',
+
+    // accounts
+    LINK_ACCOUNT: 'LINK_ACCOUNT',
+    GET_ACCOUNTS: 'GET_ACCOUNTS',
+    GET_ACCOUNT_BALANCE: 'GET_ACCOUNT_BALANCE',
 
     // parameters
     GET_BUSINESS_TYPES: 'GET_BUSINESS_TYPES',
@@ -54,6 +64,11 @@ const SILA_ROUTES = {
     [SILA_PATHS.CERTIFY_BUSINESS]: certifyBusiness,
     [SILA_PATHS.GET_ENTITY]: getEntity,
     [SILA_PATHS.GET_ENTITIES]: getEntities,
+
+    // accounts
+    [SILA_PATHS.LINK_ACCOUNT]: linkAccount,
+    [SILA_PATHS.GET_ACCOUNTS]: getAccounts,
+    [SILA_PATHS.GET_ACCOUNT_BALANCE]: getAccountBalance,
 
     // parameters
     [SILA_PATHS.GET_BUSINESS_TYPES]: getBusinessTypes,
