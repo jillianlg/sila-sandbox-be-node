@@ -9,7 +9,7 @@ const { SILA_PATHS } = require('../../src/routes/index');
 const { USER_HANDLE_INDIVIDUAL_ONE } = require('../../.env');
 
 describe('tests Sila API integration', () => {
-    it.only('/link_account automated auth', async () => {
+    it('/link_account automated auth', async () => {
         // prepare the request body
         const body = {
             apiPath: SILA_PATHS.LINK_ACCOUNT,
