@@ -5,7 +5,7 @@ const util = require('util');
 const readFile = util.promisify(fs.readFile);
 
 // local packages
-const { encryptMessage, decryptPrivateKey } = require('../../utils');
+const { signMessage, decryptPrivateKey } = require('../../utils');
 
 // consts
 const { SILA_URLS } = require('../../consts');
@@ -55,8 +55,8 @@ async function update(data) {
 
     // generate authorization headers
     const appPrivateKey = APP_PRIVATE_KEY;
-    const authSignature = encryptMessage(appPrivateKey, body);
-    const userSignature = encryptMessage(ENTITY_PRIVATE_KEY, body);
+    const authSignature = signMessage(appPrivateKey, body);
+    const userSignature = signMessage(ENTITY_PRIVATE_KEY, body);
 
     const headers = {
         authsignature: authSignature,

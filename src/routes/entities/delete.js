@@ -5,7 +5,7 @@ const util = require('util');
 const readFile = util.promisify(fs.readFile);
 
 // local packages
-const { encryptMessage, decryptPrivateKey } = require('../../utils');
+const { signMessage, decryptPrivateKey } = require('../../utils');
 
 // consts
 const { SILA_URLS } = require('../../consts');
@@ -40,8 +40,8 @@ async function deleteUserInfo(data) {
      if(!ENTITY_PRIVATE_KEY) return new Error('No user found');
  
     // generate authorization headers
-    const authSignature = encryptMessage(APP_PRIVATE_KEY, body);
-    const userSignature = encryptMessage(ENTITY_PRIVATE_KEY, body);
+    const authSignature = signMessage(APP_PRIVATE_KEY, body);
+    const userSignature = signMessage(ENTITY_PRIVATE_KEY, body);
 
     const headers = {
         authsignature: authSignature,

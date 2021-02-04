@@ -6,7 +6,7 @@ const util = require('util');
 const writeFile = util.promisify(fs.writeFile);
 
 // local packages
-const { createWallet, encryptMessage, encryptPrivateKey } = require('../../utils');
+const { createWallet, signMessage, encryptPrivateKey } = require('../../utils');
 
 // consts
 const { SILA_URLS } = require('../../consts');
@@ -19,16 +19,16 @@ const { APP_HANDLE, APP_PRIVATE_KEY } = require('../../../.env');
  * registers a user with sila
  * @param entityInfo.entity.first_name [required if individual] the individual's first name
  * @param entityInfo.entity.last_name [required if individual] the individual's last name
+ * @param entityInfo.entity.birthdate [optional] birthdate of the individual. must be YYYY-MM-DD
  * @param entityInfo.entity.entity_name [required if business] the name of the entity
  * @param entityInfo.entity.businessType [required if business] see list of possible types here: https://docs.silamoney.com/docs/get_business_types
  * @param entityInfo.entity.naics_code [required if business] see list of possible codes here: https://docs.silamoney.com/docs/get_naics_categories
  * @param entityInfo.entity.type [optional] either "business" or "individual". Will default to "individual" if excluded
- * @param entityInfo.entity.birthdate [optional] birthdate of the individual. must be YYYY-MM-DD
  * 
  * @param entityInfo.address.address_alias [optional] nickname for address
  * @param entityInfo.address.street_address_1 [optional] street address first line
  * @param entityInfo.address.street_address_2 [optional] street address second line
- * @param entityInfo.address.city
+ * @param entityInfo.address.city [optional] city
  * @param entityInfo.address.state [optiona] in the format XX using standard state abbreviation
  * @param entityInfo.address.country [optional] only option is "US" for now
  * @param entityInfo.address.postal_code [optional] accepts both ##### and #####-#### formats
@@ -87,7 +87,7 @@ async function register(entityInfo) {
 
     // encrypt the message
     const appPrivateKey = APP_PRIVATE_KEY;
-    const signature = encryptMessage(appPrivateKey, body);
+    const signature = signMessage(appPrivateKey, body);
     const headers = {
         authsignature: signature
     };

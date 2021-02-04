@@ -5,7 +5,7 @@ const util = require('util');
 const readFile = util.promisify(fs.readFile);
 
 // local packages
-const { encryptMessage, decryptPrivateKey } = require('../../utils');
+const { signMessage, decryptPrivateKey } = require('../../utils');
 
 // consts
 const { APP_PRIVATE_KEY, APP_HANDLE } = require('../../../.env');
@@ -37,8 +37,8 @@ async function checkKYC(data) {
 
     // generate authorization headers
     const appPrivateKey = APP_PRIVATE_KEY;
-    const authSignature = encryptMessage(appPrivateKey, body);
-    const userSignature = encryptMessage(ENTITY_PRIVATE_KEY, body);
+    const authSignature = signMessage(appPrivateKey, body);
+    const userSignature = signMessage(ENTITY_PRIVATE_KEY, body);
 
     const headers = {
         authsignature: authSignature,

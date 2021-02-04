@@ -33,7 +33,7 @@ function decryptPrivateKey(encryptedPrivateKey) {
 }
 
 // encrypts a message
-function encryptMessage(privateKey, message) {
+function signMessage(privateKey, message) {
     // stringify message
     const jsonMessage = JSON.stringify(message);
 
@@ -44,9 +44,20 @@ function encryptMessage(privateKey, message) {
     return EthCrypto.sign(privateKey, msgHash).substring(2);
 }
 
+// encrypts a string
+function signString(privateKey, string) {
+    console.log('string: ', string);
+    //encrypt string
+    const stringHash = EthCrypto.hash.keccak256(string);
+
+    //create and return a signature, removing the default '0x'
+    return EthCrypto.sign(privateKey, stringHash).substring(2);
+}
+
 module.exports = {
     createWallet,
-    encryptMessage,
+    signMessage,
+    signString,
     encryptPrivateKey,
     decryptPrivateKey
 }

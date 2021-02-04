@@ -2,7 +2,7 @@
 const axios = require('axios');
 
 // local packages
-const { encryptMessage } = require('../../utils');
+const { signMessage } = require('../../utils');
 
 // consts
 const { APP_PRIVATE_KEY, APP_HANDLE } = require('../../../.env');
@@ -26,7 +26,7 @@ async function checkHandle(data) {
 
     // generate authorization headers
     const appPrivateKey = APP_PRIVATE_KEY;
-    const authSignature = encryptMessage(appPrivateKey, body);
+    const authSignature = signMessage(appPrivateKey, body);
 
     const headers = {
         authsignature: authSignature

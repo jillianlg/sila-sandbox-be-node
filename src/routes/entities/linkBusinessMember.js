@@ -5,7 +5,7 @@ const { promisify } = require('util');
 const readFile = promisify(fs.readFile);
 
 // local packages
-const { encryptMessage, decryptPrivateKey } = require('../../utils');
+const { signMessage, decryptPrivateKey } = require('../../utils');
 
 // consts
 const { APP_PRIVATE_KEY, APP_HANDLE } = require('../../../.env');
@@ -68,9 +68,9 @@ async function linkBusinessMember(data) {
 
     // generate authorization headers
     const appPrivateKey = APP_PRIVATE_KEY;
-    const authSignature = encryptMessage(appPrivateKey, body);
-    const businessSignature = encryptMessage(BUSINESS_PRIVATE_KEY, body);
-    const userSignature = encryptMessage(USER_PRIVATE_KEY, body);
+    const authSignature = signMessage(appPrivateKey, body);
+    const businessSignature = signMessage(BUSINESS_PRIVATE_KEY, body);
+    const userSignature = signMessage(USER_PRIVATE_KEY, body);
 
     const headers = {
         authsignature: authSignature,

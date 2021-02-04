@@ -2,7 +2,7 @@
 const axios = require('axios');
 
 // local packages
-const { encryptMessage } = require('../../utils');
+const { signMessage } = require('../../utils');
 
 // consts
 const { APP_PRIVATE_KEY, APP_HANDLE } = require('../../../.env');
@@ -26,7 +26,7 @@ async function getEntities(data) {
     if(data && data.entityType) body.entity_type = data.entityType;
 
     // generate authorization headers
-    const authSignature = encryptMessage(APP_PRIVATE_KEY, body);
+    const authSignature = signMessage(APP_PRIVATE_KEY, body);
 
     const headers = {
         authsignature: authSignature,
