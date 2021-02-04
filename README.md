@@ -10,5 +10,5 @@ This is a back-end sandbox intended to be used for testing and experimenting wit
 
 1. Clone the repo
 2. Run `npm i`
-3. Set up your `.env.js` file based on `.env.example.js` in the home directory. This will require setting up an app using the Sila console (console.silamoney.com)
+3. Set up the "app information" section of your `.env.js` file based on `.env.example.js` in the home directory. This will require setting up an app using the Sila console (console.silamoney.com). The rest of the variables in this file will be manually populated as you make use of this sandbox.
 4. You can now use `npm test` to run tests, which will hit the Sila sandbox API. Note that tests are not designed to be run all at once; you will need to make use of `only` and `skip`

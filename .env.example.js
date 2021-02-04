@@ -33,6 +33,9 @@ const UUID_BUSINESS_ADDRESS = 'UUID';
 const UUID_BUSINESS_PHONE = 'UUID';
 const UUID_BUSINESS_IDENTITY = 'UUID';
 
+// blockchain address
+const BLOCKCHAIN_ADDRESS = 'BLOCKCHAIN_ADDRESS';
+
 module.exports = {
     APP_HANDLE,
     APP_PRIVATE_KEY,
