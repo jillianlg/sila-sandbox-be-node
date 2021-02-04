@@ -46,7 +46,6 @@ function signMessage(privateKey, message) {
 
 // encrypts a string
 function signString(privateKey, string) {
-    console.log('string: ', string);
     //encrypt string
     const stringHash = EthCrypto.hash.keccak256(string);
 
