@@ -12,7 +12,7 @@ const {
 } = require('../consts');
 
 describe('tests Sila API integration', () => {
-    it('/register', async () => {
+    it('/register individual', async () => {
         const userInfo = {
             entity: {
                 first_name: FIRST_NAME,
@@ -23,6 +23,30 @@ describe('tests Sila API integration', () => {
         const body = {
             apiPath: SILA_PATHS.REGISTER,
             data: userInfo
+        }
+
+        const jsonBody = JSON.stringify(body);
+        const response = await silaAPI({ body: jsonBody });
+        const parsedResponse = JSON.parse(response.body);
+        
+        console.log('parsedResponse: ', parsedResponse);
+
+        expect(parsedResponse.success).to.equal(true);
+    });
+    
+    it('/register business', async () => {
+        const businessInfo = {
+            entity: {
+                entity_name: 'test business',
+                business_type: 'corporation',
+                naics_code: 721,
+                type: 'business',
+            }
+        }
+
+        const body = {
+            apiPath: SILA_PATHS.REGISTER,
+            data: businessInfo
         }
 
         const jsonBody = JSON.stringify(body);
