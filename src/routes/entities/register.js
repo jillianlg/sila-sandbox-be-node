@@ -17,38 +17,38 @@ const { APP_HANDLE, APP_PRIVATE_KEY } = require('../../../.env');
 
 /**
  * registers a user with sila
- * @param entityInfo.entity.first_name [required if individual] the individual's first name
- * @param entityInfo.entity.last_name [required if individual] the individual's last name
- * @param entityInfo.entity.birthdate [optional] birthdate of the individual. must be YYYY-MM-DD
- * @param entityInfo.entity.entity_name [required if business] the name of the entity
- * @param entityInfo.entity.businessType [required if business] see list of possible types here: https://docs.silamoney.com/docs/get_business_types
- * @param entityInfo.entity.naics_code [required if business] see list of possible codes here: https://docs.silamoney.com/docs/get_naics_categories
- * @param entityInfo.entity.type [optional] either "business" or "individual". Will default to "individual" if excluded
+ * @param data.entity.first_name [required if individual] the individual's first name
+ * @param data.entity.last_name [required if individual] the individual's last name
+ * @param data.entity.birthdate [optional] birthdate of the individual. must be YYYY-MM-DD
+ * @param data.entity.entity_name [required if business] the name of the entity
+ * @param data.entity.businessType [required if business] see list of possible types here: https://docs.silamoney.com/docs/get_business_types
+ * @param data.entity.naics_code [required if business] see list of possible codes here: https://docs.silamoney.com/docs/get_naics_categories
+ * @param data.entity.type [optional] either "business" or "individual". Will default to "individual" if excluded
  * 
- * @param entityInfo.address.address_alias [optional] nickname for address
- * @param entityInfo.address.street_address_1 [optional] street address first line
- * @param entityInfo.address.street_address_2 [optional] street address second line
- * @param entityInfo.address.city [optional] city
- * @param entityInfo.address.state [optiona] in the format XX using standard state abbreviation
- * @param entityInfo.address.country [optional] only option is "US" for now
- * @param entityInfo.address.postal_code [optional] accepts both ##### and #####-#### formats
+ * @param data.address.address_alias [optional] nickname for address
+ * @param data.address.street_address_1 [optional] street address first line
+ * @param data.address.street_address_2 [optional] street address second line
+ * @param data.address.city [optional] city
+ * @param data.address.state [optiona] in the format XX using standard state abbreviation
+ * @param data.address.country [optional] only option is "US" for now
+ * @param data.address.postal_code [optional] accepts both ##### and #####-#### formats
  * 
- * @param entityInfo.identity.identity_alias [optional] only options are "SSN" or "EIN"
- * @param entityInfo.identity.identity_value [optional] must be valid SSN or EIN
+ * @param data.identity.identity_alias [optional] only options are "SSN" or "EIN"
+ * @param data.identity.identity_value [optional] must be valid SSN or EIN
  * 
- * @param entityInfo.contact.phone [optional] must be ###-###-#### format
- * @param entityInfo.contact.contact_alias [optional] nickname for contact
- * @param entityInfo.contact.email [optional] must match standard email format
+ * @param data.contact.phone [optional] must be ###-###-#### format
+ * @param data.contact.contact_alias [optional] nickname for contact
+ * @param data.contact.email [optional] must match standard email format
  */
-async function register(entityInfo) {
+async function register(data) {
     // create the user handle
     const uuid = v4();
     let USER_HANDLE;
-    if((entityInfo.entity.type) && (entityInfo.entity.type === 'business')) {
-        const flattenedBusinessName = entityInfo.entity.entity_name.replace(/ /g, "_");
+    if((data.entity.type) && (data.entity.type === 'business')) {
+        const flattenedBusinessName = data.entity.entity_name.replace(/ /g, "_");
         USER_HANDLE = `${APP_HANDLE}.${flattenedBusinessName}.${uuid}`;
     } else {
-        USER_HANDLE = `${APP_HANDLE}.${entityInfo.entity.first_name}.${entityInfo.entity.last_name}.${uuid}`;
+        USER_HANDLE = `${APP_HANDLE}.${data.entity.first_name}.${data.entity.last_name}.${uuid}`;
     }
 
     // create the wallet
@@ -70,8 +70,8 @@ async function register(entityInfo) {
     }
 
     // add each data type to the body, to avoid populating data with empty strings
-    for(const key of Object.keys(entityInfo)) {
-        body[key] = entityInfo[key];
+    for(const key of Object.keys(data)) {
+        body[key] = data[key];
     }
 
     // NOTE: Your app will need to secure user private keys using a KSM
@@ -79,11 +79,11 @@ async function register(entityInfo) {
     // ** DO NOT USE THIS METHOD UNDER ANY CIRCUMSTANCES FOR ANYTHING OTHER THAN TESTING **
     // ** NEVER COMMIT OR SHARE PRIVATE KEYS **
     const entityFileName = `${USER_HANDLE}.info.json`;
-    const KMSEntityInfo = JSON.stringify({
+    const KMSdata = JSON.stringify({
         USER_HANDLE,
         USER_PRIVATE_KEY: encryptPrivateKey(wallet.privateKey)
     });
-    await writeFile(entityFileName, KMSEntityInfo);
+    await writeFile(entityFileName, KMSdata);
 
     // encrypt the message
     const appPrivateKey = APP_PRIVATE_KEY;
