@@ -1,11 +1,11 @@
 // * create a .env.js file in the home directory (sibling to index.js) and include these variables within
+// * you will need to manually populate these fields as you generate the data with tests
 
 // app information
 const APP_HANDLE = 'YOUR_APP_HANDLE_HERE';
 const APP_PRIVATE_KEY = 'YOUR_APP_PRIVATE_KEY_HERE'; // ** DO NOT COMMIT NOR SHARE YOUR APP PRIVATE KEY **
 const ENCRYPTION_KEY = 'YOUR_ENCRYPTION_KEY_HERE'; // must be 32 characters
 const ENCRYPTION_IV_STRING = 'YOUR_ENCRYPTION_IV_STRING_HERE'; // must be 16 characters
-
 
 // * user handles will need to be pulled from test files
 // * test files are written into the home directory upon testing the /register endpoint
@@ -17,7 +17,6 @@ const USER_HANDLE_INDIVIDUAL_TWO = 'USER_HANDLE';
 // business user handles
 const USER_HANDLE_BUSINESS_ONE = 'USER_HANDLE';
 const USER_HANDLE_BUSINESS_TWO = 'USER_HANDLE';
-
 
 // * can be retrieved from /get_entity
 // * are also returned from a successful /add/[info] call
@@ -53,4 +52,5 @@ module.exports = {
     UUID_BUSINESS_ADDRESS,
     UUID_BUSINESS_PHONE,
     UUID_BUSINESS_IDENTITY,
+    BLOCKCHAIN_ADDRESS,
 }
