@@ -3,9 +3,6 @@
 .vscode
 node_modules
 
-# build
-function.zip
-
 # env
 .env.js
 *.info.json
