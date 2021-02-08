@@ -27,6 +27,13 @@ const { updateWallet } = require('./wallets/updateWallet');
 const { getSilaBalance } = require('./wallets/getSilaBalance');
 const { deleteWallet } = require('./wallets/deleteWallet');
 
+// transactions
+const { issueSila } = require('./transactions/issueSila');
+const { transferSila } = require('./transactions/transferSila');
+const { redeemSila } = require('./transactions/redeemSila');
+const { getTransactions } = require('./transactions/getTransactions');
+const { cancelTransaction } = require('./transactions/cancelTransaction');
+
 // parameters
 const { getBusinessTypes } = require('./parameters/getBusinessTypes');
 const { getBusinessRoles } = require('./parameters/getBusinessRoles');
@@ -59,6 +66,13 @@ const SILA_PATHS = {
     UPDATE_WALLET: 'UPDATE_WALLET',
     GET_SILA_BALANCE: 'GET_SILA_BALANCE',
     DELETE_WALLET: 'DELETE_WALLET',
+
+    // transactions
+    ISSUE_SILA: 'ISSUE_SILA',
+    TRANSFER_SILA: 'TRANSFER_SILA',
+    REDEEM_SILA: 'REDEEM_SILA',
+    GET_TRANSACTIONS: 'GET_TRANSACTIONS',
+    CANCEL_TRANSACTION: 'CANCEL_TRANSACTION',
 
     // parameters
     GET_BUSINESS_TYPES: 'GET_BUSINESS_TYPES',
@@ -93,6 +107,13 @@ const SILA_ROUTES = {
     [SILA_PATHS.UPDATE_WALLET]: updateWallet,
     [SILA_PATHS.GET_SILA_BALANCE]: getSilaBalance,
     [SILA_PATHS.DELETE_WALLET]: deleteWallet,
+    
+    // transactions
+    [SILA_PATHS.ISSUE_SILA]: issueSila,
+    [SILA_PATHS.TRANSFER_SILA]: transferSila,
+    [SILA_PATHS.REDEEM_SILA]: redeemSila,
+    [SILA_PATHS.GET_TRANSACTIONS]: getTransactions,
+    [SILA_PATHS.CANCEL_TRANSACTION]: cancelTransaction,
 
     // parameters
     [SILA_PATHS.GET_BUSINESS_TYPES]: getBusinessTypes,

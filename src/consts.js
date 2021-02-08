@@ -29,6 +29,13 @@ const SILA_URLS = {
     GET_SILA_BALANCE: `${SILA_BASE_SANDBOX_URL}/get_sila_balance`,
     DELETE_WALLET: `${SILA_BASE_SANDBOX_URL}/delete_wallet`,
 
+    // transactions
+    ISSUE_SILA: `${SILA_BASE_SANDBOX_URL}/issue_sila`,
+    TRANSFER_SILA: `${SILA_BASE_SANDBOX_URL}/transfer_sila`,
+    REDEEM_SILA: `${SILA_BASE_SANDBOX_URL}/redeem_sila`,
+    GET_TRANSACTIONS: `${SILA_BASE_SANDBOX_URL}/get_transactions`,
+    CANCEL_TRANSACTION: `${SILA_BASE_SANDBOX_URL}/cancel_transaction`,
+
     // parameters
     GET_BUSINESS_TYPES: `${SILA_BASE_SANDBOX_URL}/get_business_types`,
     GET_BUSINESS_ROLES: `${SILA_BASE_SANDBOX_URL}/get_business_roles`,
