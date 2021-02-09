@@ -13,9 +13,13 @@ const { SILA_URLS } = require('../../consts');
 
 /**
  * pulls funds from a linked bank account and issues Sila to an user's wallet
- * @param data.userHandle the handle of the user receiving Sila
+ * @param data.userHandle [required] the handle of the user receiving Sila
+ * @param data.amount [required] the amount of Sila to issue (1 Sila = .01 USD)
+ * @param data.accountName [optional] will default to 'default' if not included
  */
 async function issueSila(data) {
+    const accountName = data.accountName ? data.accountName : 'default';
+
     // prepare the request body
     const body = {
         header: {
@@ -24,6 +28,9 @@ async function issueSila(data) {
             user_handle: data.userHandle,
             reference: 'ref'
         },
+        message: 'issue_msg',
+        amount: data.amount,
+        account_name: accountName,
     }
 
     // imitates retrieving the entity's private key from your KMS

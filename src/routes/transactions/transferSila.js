@@ -13,9 +13,14 @@ const { SILA_URLS } = require('../../consts');
 
 /**
  * transfers sila between two user's wallets
- * @param data.userHandle the user to send funds
+ * @param data.userHandle [required] the user to send funds
+ * @param data.amount [required] the amount of Sila to transfer
+ * @param data.destinationHandle [required] the user to receive the funds
+ * @param data.destinationWallet [optional] nickname of desired destination wallet. if not provided will default to 'default'
+ * @param data.destinationAddress [optional] blockchain address of desired destination. if not provided will default to 'default'
  */
 async function transferSila(data) {
+    console.log('data: ', data.amount);
     // prepare the request body
     const body = {
         header: {
@@ -24,7 +29,13 @@ async function transferSila(data) {
             user_handle: data.userHandle,
             reference: 'ref'
         },
+        message: 'transfer_msg',
+        destination_handle: data.destinationHandle,
+        amount: data.amount,
     }
+
+    if(data.destinationWallet) { body.destination_wallet = data.destinationWallet }
+    else if(data.destinationAddress) body.destination_address = data.destinationAddress;
 
     // imitates retrieving the entity's private key from your KMS
     const entityInfo = await readFile(`./${data.userHandle}.info.json`, 'utf8')

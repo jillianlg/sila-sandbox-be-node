@@ -6,7 +6,7 @@ const { silaAPI } = require('../../index');
 
 // consts
 const { SILA_PATHS } = require('../../src/routes/index');
-const { USER_HANDLE_INDIVIDUAL_ONE } = require('../../.env');
+const { USER_HANDLE_INDIVIDUAL_ONE, USER_HANDLE_INDIVIDUAL_TWO } = require('../../.env');
 
 describe('tests Sila API integration', () => {
     it('/transfer_sila', async () => {
@@ -15,6 +15,8 @@ describe('tests Sila API integration', () => {
             apiPath: SILA_PATHS.TRANSFER_SILA,
             data: {
                 userHandle: USER_HANDLE_INDIVIDUAL_ONE,
+                amount: 1,
+                destinationHandle: USER_HANDLE_INDIVIDUAL_TWO,
             },
         }
 

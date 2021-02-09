@@ -13,7 +13,8 @@ const { SILA_URLS } = require('../../consts');
 
 /**
  * cancels a pending transaction
- * @param data.userHandle the handle of the user who initiated the transaction
+ * @param data.userHandle [required] the handle of the user who initiated the transaction
+ * @param data.transactionID [required] the ID of the transaction (retrieved using /get_transactions)
  */
 async function cancelTransaction(data) {
     // prepare the request body
@@ -24,6 +25,7 @@ async function cancelTransaction(data) {
             user_handle: data.userHandle,
             reference: 'ref'
         },
+        transaction_id: data.transactionID,
     }
 
     // imitates retrieving the entity's private key from your KMS

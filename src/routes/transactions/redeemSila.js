@@ -13,7 +13,10 @@ const { SILA_URLS } = require('../../consts');
 
 /**
  * redeems (burns) Sila and deposits money into a user's linked account
- * @param data.userHandle the user to receive funds
+ * @param data.userHandle [required] the user to redeem funds
+ * @param data.amount [required] the amount to redeem
+ * @param data.accountName [required] the account to transfer to
+ * @param data.processing_type [optional] either 'STANDARD_ACH' OR 'SAME_DAY_ACH'. defaults to 'STANDARD_ACH'
  */
 async function redeemSila(data) {
     // prepare the request body
@@ -24,7 +27,11 @@ async function redeemSila(data) {
             user_handle: data.userHandle,
             reference: 'ref'
         },
+        amount: data.amount,
+        account_name: data.accountName,
     }
+
+    if(data.processing_type) body.processing_type = data.processingType;
 
     // imitates retrieving the entity's private key from your KMS
     const entityInfo = await readFile(`./${data.userHandle}.info.json`, 'utf8')

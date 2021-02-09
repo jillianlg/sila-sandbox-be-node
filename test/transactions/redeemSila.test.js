@@ -15,6 +15,8 @@ describe('tests Sila API integration', () => {
             apiPath: SILA_PATHS.REDEEM_SILA,
             data: {
                 userHandle: USER_HANDLE_INDIVIDUAL_ONE,
+                amount: 1,
+                accountName: 'default',
             },
         }
 

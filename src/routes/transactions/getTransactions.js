@@ -13,7 +13,8 @@ const { SILA_URLS } = require('../../consts');
 
 /**
  * queries all transactions associated with a user
- * @param data.userHandle the user to query
+ * @param data.userHandle [required] the user to query
+ * @param data.searchFilters [optional] robust search object. See docs for details
  */
 async function getTransactions(data) {
     // prepare the request body
@@ -24,7 +25,10 @@ async function getTransactions(data) {
             user_handle: data.userHandle,
             reference: 'ref'
         },
+        message: 'get_transactions_msg',
     }
+
+    if(data.searchFilters) body.search_filters = data.searchFilters;
 
     // imitates retrieving the entity's private key from your KMS
     const entityInfo = await readFile(`./${data.userHandle}.info.json`, 'utf8')

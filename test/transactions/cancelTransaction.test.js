@@ -15,6 +15,7 @@ describe('tests Sila API integration', () => {
             apiPath: SILA_PATHS.CANCEL_TRANSACTION,
             data: {
                 userHandle: USER_HANDLE_INDIVIDUAL_ONE,
+                transactionID: 'TRANSACTION_UUID',
             },
         }
 
