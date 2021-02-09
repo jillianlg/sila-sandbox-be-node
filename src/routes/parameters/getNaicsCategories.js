@@ -9,9 +9,9 @@ const { APP_PRIVATE_KEY, APP_HANDLE } = require('../../../.env');
 const { SILA_URLS } = require('../../consts');
 
 /**
- * retrieves a list of business types
+ * retrieves a list of NAICS categories
  */
-async function getBusinessTypes() {
+async function getNaicsCategories() {
     // prepare the request body
     const body = {
         header: {
@@ -33,7 +33,7 @@ async function getBusinessTypes() {
     try {
         return await axios({
             method: 'post',
-            url: SILA_URLS.GET_BUSINESS_TYPES,
+            url: SILA_URLS.GET_NAICS_CATEGORIES,
             headers: headers,
             data: body,
             validateStatus: () => { return true }
@@ -45,5 +45,5 @@ async function getBusinessTypes() {
 }
 
 module.exports = {
-    getBusinessTypes
+    getNaicsCategories
 }

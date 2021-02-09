@@ -37,6 +37,7 @@ const { cancelTransaction } = require('./transactions/cancelTransaction');
 // parameters
 const { getBusinessTypes } = require('./parameters/getBusinessTypes');
 const { getBusinessRoles } = require('./parameters/getBusinessRoles');
+const { getNaicsCategories } = require('./parameters/getNaicsCategories');
 
 const SILA_PATHS = {
     // entities
@@ -77,6 +78,7 @@ const SILA_PATHS = {
     // parameters
     GET_BUSINESS_TYPES: 'GET_BUSINESS_TYPES',
     GET_BUSINESS_ROLES: 'GET_BUSINESS_ROLES',
+    GET_NAICS_CATEGORIES: 'GET_NAICS_CATEGORIES',
 }
 
 const SILA_ROUTES = {
@@ -118,6 +120,7 @@ const SILA_ROUTES = {
     // parameters
     [SILA_PATHS.GET_BUSINESS_TYPES]: getBusinessTypes,
     [SILA_PATHS.GET_BUSINESS_ROLES]: getBusinessRoles,
+    [SILA_PATHS.GET_NAICS_CATEGORIES]: getNaicsCategories,
 }
 
 module.exports = {

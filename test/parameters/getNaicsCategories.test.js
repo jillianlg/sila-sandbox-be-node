@@ -8,10 +8,10 @@ const { silaAPI } = require('../../index');
 const { SILA_PATHS } = require('../../src/routes/index');
 
 describe('tests Sila API integration', () => {
-    it('/get_business_roles', async () => {
+    it.only('/get_naics_categories', async () => {
         // prepare the request body
         const body = {
-            apiPath: SILA_PATHS.GET_BUSINESS_ROLES,
+            apiPath: SILA_PATHS.GET_NAICS_CATEGORIES,
         }
 
         const jsonBody = JSON.stringify(body);
