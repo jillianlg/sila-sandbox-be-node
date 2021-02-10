@@ -8,7 +8,7 @@ const { silaAPI } = require('../../index');
 const { SILA_PATHS } = require('../../src/routes/index');
 
 describe('tests Sila API integration', () => {
-    it.only('/get_naics_categories', async () => {
+    it('/get_naics_categories', async () => {
         // prepare the request body
         const body = {
             apiPath: SILA_PATHS.GET_NAICS_CATEGORIES,
