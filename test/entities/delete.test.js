@@ -21,7 +21,7 @@ const {
     UUID_INDIVIDUAL_IDENTITY,
 } = require('../../.env');
 
-describe('tests Sila API integration', () => {
+describe.skip('tests Sila API integration', () => {
     it('/delete/email', async () => {
         // prepare the request body
         const body = {

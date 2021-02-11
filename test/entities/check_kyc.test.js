@@ -8,7 +8,7 @@ const { silaAPI } = require('../../index');
 const { SILA_PATHS } = require('../../src/routes/index');
 const { USER_HANDLE_INDIVIDUAL_ONE } = require('../../.env');
 
-describe('tests Sila API integration', () => {
+describe.skip('tests Sila API integration', () => {
     it('/check_kyc', async () => {
         // prepare the request body
         const body = {

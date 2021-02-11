@@ -8,7 +8,7 @@ const { silaAPI } = require('../../index');
 const { SILA_PATHS } = require('../../src/routes/index');
 const { USER_HANDLE_BUSINESS_ONE, USER_HANDLE_INDIVIDUAL_ONE, CERTIFICATION_TOKEN_INDIVIDUAL_ONE } = require('../../.env');
 
-describe('tests Sila API integration', () => {
+describe.skip('tests Sila API integration', () => {
     it('/certify_beneficial_owner', async () => {
         // prepare the request body
         const body = {

@@ -8,7 +8,7 @@ const { silaAPI } = require('../../index');
 // consts
 const { SILA_PATHS } = require('../../src/routes/index');
 
-describe('tests Sila API integration', () => {
+describe.skip('tests Sila API integration', () => {
     it('/check_handle', async () => {
         const handleToCheck = v4();
         
