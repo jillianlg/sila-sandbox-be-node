@@ -14,7 +14,7 @@ const { SILA_URLS } = require('../index');
 
 /**
  * creates and registers a new wallet for a user
- * @param data.userHandle [required] the user whose accounts will be listed
+ * @param data.userHandle [required] the user to recieve a new wallet
  */
 async function registerWallet(data) {
     // prepare the request body
@@ -29,14 +29,16 @@ async function registerWallet(data) {
     // create the wallet and store its information
     const wallet = createWallet();
 
-    // NOTE: Your app will need to secure user private keys using a KSM
+    // NOTE: Your app will need to secure user private keys using a KMS
     // ** THIS IS NOT A SECURE METHOD TO DO SO **
-    // ** DO NOT USE THIS METHOD UNDER ANY CIRCUMSTANCES FOR ANYTHING OTHER THAN TESTING **
+    // ** DO NOT USE THIS METHOD UNDER ANY CIRCUMSTANCES FOR ANYTHING OTHER THAN INITIAL TESTING **
+    // ** CREATE AND INTEGRATE A KMS - EVEN FOR TESTING - AS QUICKLY AS POSSIBLE **
     // ** NEVER COMMIT OR SHARE PRIVATE KEYS **
     const entityFileName = `${wallet.address}.info.json`;
     const KMSEntityInfo = JSON.stringify({
         WALLET_ADDRESS: wallet.address,
-        WALLET_PRIVATE_KEY: encryptPrivateKey(wallet.privateKey)
+        WALLET_PRIVATE_KEY: encryptPrivateKey(wallet.privateKey),
+        USER_HANDLE: data.userHandle
     });
     await writeFile(entityFileName, KMSEntityInfo);
 
@@ -44,7 +46,7 @@ async function registerWallet(data) {
     body.wallet = {
         blockchain_address: wallet.address,
         blockchain_network: 'ETH',
-        nickname: 'new wallet nickname',
+        nickname: 'NEW_WALLET_NICKNAME',
     }
 
     // generate wallet verification signature and add it to the body
@@ -68,7 +70,7 @@ async function registerWallet(data) {
         usersignature: userSignature
     }
 
-    // request update
+    // make request
     try {
         return await axios({
             method: 'post',

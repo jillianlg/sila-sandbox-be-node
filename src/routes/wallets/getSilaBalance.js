@@ -5,7 +5,7 @@ const axios = require('axios');
 const { SILA_URLS } = require('../index');
 
 /**
- * retrieves the user's default wallet
+ * retrieves the balance of a wallet
  * @param data.blockchainAddress [required] the blockchainaddress to query
  */
 async function getSilaBalance(data) {

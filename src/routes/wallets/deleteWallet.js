@@ -13,7 +13,7 @@ const { SILA_URLS } = require('../index');
 
 /**
  * delete's a user's wallet
- * @param data.userHandle [required] the user whose accounts will be listed
+ * @param data.userHandle [required] the handle of the user's wallet to be deleted
  */
 async function deleteWallet(data) {
     // prepare the request body
@@ -42,7 +42,7 @@ async function deleteWallet(data) {
         usersignature: userSignature
     }
 
-    // request update
+    // make request
     try {
         return await axios({
             method: 'post',

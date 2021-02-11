@@ -12,10 +12,10 @@ const { APP_HANDLE, APP_PRIVATE_KEY } = require('../../../.env');
 const { SILA_URLS } = require('../index');
 
 /**
- * retrieves list of user's linked accounts
- * @param data.userHandle [required] the user whose accounts will be listed
+ * updates the information of a wallet
+ * @param data.userHandle [required] the user whose wallet will be updated
  * @param data.nickname [optional] a new nickname for the wallet
- * @param data.isDefault [optional] true to set wallet as default
+ * @param data.isDefault [optional] input 'true' as a boolean to set wallet as default
  */
 async function updateWallet(data) {
     // prepare the request body
@@ -45,7 +45,7 @@ async function updateWallet(data) {
         usersignature: userSignature
     }
 
-    // request update
+    // make request
     try {
         return await axios({
             method: 'post',

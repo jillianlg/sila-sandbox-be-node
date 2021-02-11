@@ -13,7 +13,7 @@ const { SILA_URLS } = require('../index');
 
 /**
  * retrieves the user's default wallet
- * @param data.userHandle [required] the user whose accounts will be listed
+ * @param data.userHandle [required] the handle of the user whose wallet will be returned
  */
 async function getWallet(data) {
     // prepare the request body
@@ -42,7 +42,7 @@ async function getWallet(data) {
         usersignature: userSignature
     }
 
-    // request update
+    // make request
     try {
         return await axios({
             method: 'post',

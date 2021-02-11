@@ -13,7 +13,8 @@ const { SILA_URLS } = require('../index');
 
 /**
  * lists all wallets associated with a user's account
- * @param data.userHandle [required] the user whose accounts will be listed
+ * @param data.userHandle [required] the user whose wallets will be listed
+ * @param data.searchFilters [optional] a robust search parameters object. see https://docs.silamoney.com/docs/get_wallets
  */
 async function getWallets(data) {
     // prepare the request body
@@ -24,6 +25,8 @@ async function getWallets(data) {
             user_handle: data.userHandle
         },
     }
+
+    if(data.searchFilters) body.search_filters = data.searthFilters;
 
     // imitates retrieving the entity's private key from your KMS
     const entityInfo = await readFile(`./${data.userHandle}.info.json`, 'utf8')
@@ -42,7 +45,7 @@ async function getWallets(data) {
         usersignature: userSignature
     }
 
-    // request update
+    // make request
     try {
         return await axios({
             method: 'post',
