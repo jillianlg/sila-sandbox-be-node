@@ -10,7 +10,7 @@ const { signMessage, signString, encryptPrivateKey, decryptPrivateKey, createWal
 
 // consts
 const { APP_HANDLE, APP_PRIVATE_KEY } = require('../../../.env');
-const { SILA_URLS } = require('../../consts');
+const { SILA_URLS } = require('../index');
 
 /**
  * creates and registers a new wallet for a user

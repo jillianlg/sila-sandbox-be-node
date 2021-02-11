@@ -2,7 +2,7 @@
 const axios = require('axios');
 
 // consts
-const { SILA_URLS } = require('../../consts');
+const { SILA_URLS } = require('../index');
 
 /**
  * retrieves the user's default wallet

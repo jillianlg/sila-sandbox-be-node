@@ -8,7 +8,7 @@ const readFile = util.promisify(fs.readFile);
 const { signMessage, decryptPrivateKey } = require('../../utils');
 
 // consts
-const { SILA_URLS } = require('../../consts');
+const { SILA_URLS } = require('../index');
 const { APP_PRIVATE_KEY, APP_HANDLE } = require('../../../.env');
 
 const SILA_UPDATE_TYPES = {

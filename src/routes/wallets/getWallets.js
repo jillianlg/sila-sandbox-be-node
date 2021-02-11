@@ -9,7 +9,7 @@ const { signMessage, decryptPrivateKey } = require('../../utils');
 
 // consts
 const { APP_HANDLE, APP_PRIVATE_KEY } = require('../../../.env');
-const { SILA_URLS } = require('../../consts');
+const { SILA_URLS } = require('../index');
 
 /**
  * lists all wallets associated with a user's account
