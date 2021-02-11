@@ -9,7 +9,7 @@ const writeFile = util.promisify(fs.writeFile);
 const { createWallet, signMessage, encryptPrivateKey } = require('../../utils');
 
 // consts
-const { SILA_URLS } = require('../index');
+const { SILA_URLS } = require('../../consts');
 const { APP_HANDLE, APP_PRIVATE_KEY } = require('../../../.env');
 
 // NOTE: This only registers a user with Sila. It does not handle login informtion.

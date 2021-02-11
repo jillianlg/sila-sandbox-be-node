@@ -9,7 +9,7 @@ const { signMessage, decryptPrivateKey } = require('../../utils');
 
 // consts
 const { APP_HANDLE, APP_PRIVATE_KEY } = require('../../../.env');
-const { SILA_URLS } = require('../index');
+const { SILA_URLS } = require('../../consts');
 
 /**
  * links a bank account to a Sila wallet

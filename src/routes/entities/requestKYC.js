@@ -9,7 +9,7 @@ const { signMessage, decryptPrivateKey } = require('../../utils');
 const { APP_PRIVATE_KEY, APP_HANDLE } = require('../../../.env');
 
 // consts
-const { SILA_URLS } = require('../index');
+const { SILA_URLS } = require('../../consts');
 
 /**
  * requests KYC for specified entity

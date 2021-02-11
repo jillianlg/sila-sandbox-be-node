@@ -2,7 +2,7 @@
 const axios = require('axios');
 
 // consts
-const { SILA_URLS } = require('../index');
+const { SILA_URLS } = require('../../consts');
 
 /**
  * retrieves the balance of a wallet

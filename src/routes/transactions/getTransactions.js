@@ -9,7 +9,7 @@ const { signMessage, decryptPrivateKey } = require('../../utils');
 
 // consts
 const { APP_PRIVATE_KEY, APP_HANDLE } = require('../../../.env');
-const { SILA_URLS } = require('../index');
+const { SILA_URLS } = require('../../consts');
 
 /**
  * queries all transactions associated with all of a user's wallets
