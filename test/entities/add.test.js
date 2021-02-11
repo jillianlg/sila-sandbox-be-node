@@ -6,7 +6,6 @@ const { silaAPI } = require('../../index');
 
 // consts
 const { SILA_PATHS } = require('../../src/routes/index');
-const { SILA_UPDATE_TYPES } = require('../../src/routes/entities/update');
 const {
     EMAIL,
     ADDRESS_ALIAS,
@@ -25,7 +24,7 @@ describe.skip('tests Sila API integration', () => {
         const body = {
             apiPath: SILA_PATHS.ADD,
             data: {
-                type: SILA_UPDATE_TYPES.EMAIL,
+                type: 'email',
                 userHandle: USER_HANDLE_INDIVIDUAL_ONE,
                 updateBody: {
                     email: EMAIL
@@ -46,7 +45,7 @@ describe.skip('tests Sila API integration', () => {
         const body = {
             apiPath: SILA_PATHS.ADD,
             data: {
-                type: SILA_UPDATE_TYPES.ADDRESS,
+                type: 'address',
                 userHandle: USER_HANDLE_INDIVIDUAL_ONE,
                 updateBody: {
                     address_alias: ADDRESS_ALIAS,
@@ -72,7 +71,7 @@ describe.skip('tests Sila API integration', () => {
         const body = {
             apiPath: SILA_PATHS.ADD,
             data: {
-                type: SILA_UPDATE_TYPES.PHONE,
+                type: 'phone',
                 userHandle: USER_HANDLE_INDIVIDUAL_ONE,
                 email: EMAIL,
                 updateBody: {
@@ -94,7 +93,7 @@ describe.skip('tests Sila API integration', () => {
         const body = {
             apiPath: SILA_PATHS.ADD,
             data: {
-                type: SILA_UPDATE_TYPES.IDENTITY,
+                type: 'identity',
                 userHandle: USER_HANDLE_INDIVIDUAL_ONE,
                 email: EMAIL,
                 updateBody: {

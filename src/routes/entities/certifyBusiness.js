@@ -59,7 +59,7 @@ async function certifyBusiness(data) {
         businesssignature: businessSignature,
     };
 
-    // check kyc
+    // make request
     try {
         return await axios({
             method: 'post',

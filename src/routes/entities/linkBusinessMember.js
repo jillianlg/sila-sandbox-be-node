@@ -78,7 +78,7 @@ async function linkBusinessMember(data) {
         businesssignature: businessSignature,
     };
 
-    // check kyc
+    // make request
     try {
         return await axios({
             method: 'post',

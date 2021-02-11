@@ -16,7 +16,7 @@ const { APP_PRIVATE_KEY, APP_HANDLE } = require('../../../.env');
  * @param data.userHandle [required] the user being altered
  * @param data.type [required] type of information being added to the user
  * @param data.updateBody [required] must match the format of the data type being added
- * see /register for additional details
+ * docs for update body can be found here: https://docs.silamoney.com/docs/addregistration-data
  */
 async function add(data) {
     // prepare the request body

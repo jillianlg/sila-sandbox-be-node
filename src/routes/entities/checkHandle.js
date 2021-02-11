@@ -32,7 +32,7 @@ async function checkHandle(data) {
         authsignature: authSignature
     };
 
-    // check handle
+    // make request
     try {
         return await axios({
             method: 'post',

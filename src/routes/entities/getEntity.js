@@ -12,7 +12,7 @@ const { APP_PRIVATE_KEY, APP_HANDLE } = require('../../../.env');
 const { SILA_URLS } = require('../index');
 
 /**
- * retrieves user information for specified user
+ * retrieves user information for specified entity
  * @param data.userHandle [required] the entity to be queried 
  */
 async function getEntity(data) {
@@ -42,7 +42,7 @@ async function getEntity(data) {
         usersignature: userSignature
     }
 
-    // request getEntity
+    // make request
     try {
         return await axios({
             method: 'post',

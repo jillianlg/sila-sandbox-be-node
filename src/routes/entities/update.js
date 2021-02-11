@@ -11,21 +11,13 @@ const { signMessage, decryptPrivateKey } = require('../../utils');
 const { SILA_URLS } = require('../index');
 const { APP_PRIVATE_KEY, APP_HANDLE } = require('../../../.env');
 
-const SILA_UPDATE_TYPES = {
-    ADDRESS: 'address',
-    IDENTITY: 'identity',
-    EMAIL: 'email',
-    PHONE: 'phone',
-    ENTITY: 'entity'
-}
-
 /**
  * updates pre-existing user information
  * @param data.userHandle [required] the handle of the user to be updated
- * @param data.type [required] the type of the information object to be updated
- * @param data.uuid [required for all but entity] the uuid of the information object to be updated
+ * @param data.type [required] the type of the information object to be deleted. must be one of ['address', 'identity', 'email', 'phone', 'entity']
+ * @param data.uuid [required for all but entity] the uuid of the information object to be updated.
+ * >> uuids can be retrieved from /get_entity and are also returned from a successful /add/[info] call
  * @param data.updateBody [required] must match the format of the data type being added
- *  * see /register for additional details
  */
 async function update(data) {
     // prepare the request body
@@ -83,5 +75,4 @@ async function update(data) {
 
 module.exports = {
     update,
-    SILA_UPDATE_TYPES
 }

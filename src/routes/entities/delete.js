@@ -13,10 +13,10 @@ const { APP_PRIVATE_KEY, APP_HANDLE } = require('../../../.env');
 
 /**
  * deletes an information object associated with a user
- * @param data.userHandle [required] the handle of the user to be updated
- * @param data.type [required] the type of the information object to be updated
- * @param data.uuid [required for all but email] the uuid of the information object to be updated
- *  * see /register for additional details
+ * @param data.userHandle [required] the handle of the user from whom information will be deleted
+ * @param data.type [required] the type of the information object to be deleted. must be one of ['email', 'address', 'phone', 'identity']
+ * @param data.uuid [required for all but email] the uuid of the information object to be deleted
+ * >> uuids can be retrieved from /get_entity and are also returned from a successful /add/[info] call
  */
 
 async function deleteUserInfo(data) {
@@ -51,7 +51,7 @@ async function deleteUserInfo(data) {
     // build the request url
     const url = SILA_URLS.DELETE + data.type;
 
-    // request update
+    // make request
     try {
         return await axios({
             method: 'post',

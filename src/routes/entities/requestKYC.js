@@ -12,8 +12,8 @@ const { APP_PRIVATE_KEY, APP_HANDLE } = require('../../../.env');
 const { SILA_URLS } = require('../index');
 
 /**
- * requests KYC for specified user
- * @param data.userHandle [required] user to recieve KYC request
+ * requests KYC for specified entity
+ * @param data.userHandle [required] entity to recieve KYC request
  */
 async function requestKYC(data) {
     // prepare the request body
@@ -45,7 +45,7 @@ async function requestKYC(data) {
         usersignature: userSignature
     };
 
-    // request kyc
+    // make request
     try {
         return await axios({
             method: 'post',

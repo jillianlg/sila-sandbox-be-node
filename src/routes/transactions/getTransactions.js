@@ -48,7 +48,7 @@ async function getTransactions(data) {
         usersignature: userSignature
     };
 
-    // check kyc
+    // make request
     try {
         return await axios({
             method: 'post',

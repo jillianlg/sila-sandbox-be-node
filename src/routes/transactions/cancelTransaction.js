@@ -46,7 +46,7 @@ async function cancelTransaction(data) {
         usersignature: userSignature
     };
 
-    // check kyc
+    // make request
     try {
         return await axios({
             method: 'post',

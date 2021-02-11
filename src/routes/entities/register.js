@@ -42,6 +42,9 @@ const { APP_HANDLE, APP_PRIVATE_KEY } = require('../../../.env');
  */
 async function register(data) {
     // create the user handle
+    // * user handles must be unique across the entire Sila platform. we recommend including a UUID in the user's handle
+    // * make use of /check_handle prior to registering a user to ensure the handle is available
+    // See https://docs.silamoney.com/docs/register for further endpoint details
     const uuid = v4();
     let USER_HANDLE;
     if((data.entity.type) && (data.entity.type === 'business')) {
@@ -54,7 +57,6 @@ async function register(data) {
     // create the wallet
     const wallet = createWallet();
 
-    // See https://docs.silamoney.com/docs/register for further endpoint details
     const body = {
         header: {
             created: Math.floor(Date.now() / 1000),
@@ -74,9 +76,10 @@ async function register(data) {
         body[key] = data[key];
     }
 
-    // NOTE: Your app will need to secure user private keys using a KSM
+    // NOTE: Your app will need to secure user private keys using a KMS
     // ** THIS IS NOT A SECURE METHOD TO DO SO **
-    // ** DO NOT USE THIS METHOD UNDER ANY CIRCUMSTANCES FOR ANYTHING OTHER THAN TESTING **
+    // ** DO NOT USE THIS METHOD UNDER ANY CIRCUMSTANCES FOR ANYTHING OTHER THAN INITIAL TESTING **
+    // ** CREATE AND INTEGRATE A KMS - EVEN FOR TESTING - AS QUICKLY AS POSSIBLE **
     // ** NEVER COMMIT OR SHARE PRIVATE KEYS **
     const entityFileName = `${USER_HANDLE}.info.json`;
     const KMSdata = JSON.stringify({
@@ -92,7 +95,7 @@ async function register(data) {
         authsignature: signature
     };
 
-    // register the user with Sila
+    // make request
     try {
         return await axios({
             method: 'post',

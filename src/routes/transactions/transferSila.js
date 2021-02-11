@@ -55,7 +55,7 @@ async function transferSila(data) {
         usersignature: userSignature
     };
 
-    // check kyc
+    // make request
     try {
         return await axios({
             method: 'post',

@@ -6,7 +6,6 @@ const { silaAPI } = require('../../index');
 
 // consts
 const { SILA_PATHS } = require('../../src/routes/index');
-const { SILA_UPDATE_TYPES } = require('../../src/routes/entities/update');
 const {
     UUID_INDIVIDUAL_EMAIL,
     UUID_INDIVIDUAL_ADDRESS,
@@ -21,7 +20,7 @@ describe.skip('tests Sila API integration', () => {
         const body = {
             apiPath: SILA_PATHS.UPDATE,
             data: {
-                type: SILA_UPDATE_TYPES.ENTITY,
+                type: 'entity',
                 userHandle: USER_HANDLE_INDIVIDUAL_ONE,
                 updateBody: {
                     first_name: 'NewFirst',
@@ -45,7 +44,7 @@ describe.skip('tests Sila API integration', () => {
         const body = {
             apiPath: SILA_PATHS.UPDATE,
             data: {
-                type: SILA_UPDATE_TYPES.EMAIL,
+                type: 'email',
                 userHandle: USER_HANDLE_INDIVIDUAL_ONE,
                 uuid: UUID_INDIVIDUAL_EMAIL,
                 updateBody: {
@@ -68,7 +67,7 @@ describe.skip('tests Sila API integration', () => {
         const body = {
             apiPath: SILA_PATHS.UPDATE,
             data: {
-                type: SILA_UPDATE_TYPES.ADDRESS,
+                type: 'address',
                 userHandle: USER_HANDLE_INDIVIDUAL_ONE,
                 uuid: UUID_INDIVIDUAL_ADDRESS,
                 updateBody: {
@@ -95,7 +94,7 @@ describe.skip('tests Sila API integration', () => {
         const body = {
             apiPath: SILA_PATHS.UPDATE,
             data: {
-                type: SILA_UPDATE_TYPES.PHONE,
+                type: 'phone',
                 userHandle: USER_HANDLE_INDIVIDUAL_ONE,
                 uuid: UUID_INDIVIDUAL_PHONE,
                 updateBody: {
@@ -118,7 +117,7 @@ describe.skip('tests Sila API integration', () => {
         const body = {
             apiPath: SILA_PATHS.UPDATE,
             data: {
-                type: SILA_UPDATE_TYPES.IDENTITY,
+                type: 'identity',
                 userHandle: USER_HANDLE_INDIVIDUAL_ONE,
                 uuid: UUID_INDIVIDUAL_IDENTITY,
                 updateBody: {

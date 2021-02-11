@@ -43,7 +43,7 @@ async function getAccounts(data) {
         usersignature: userSignature
     }
 
-    // request update
+    // make request
     try {
         return await axios({
             method: 'post',

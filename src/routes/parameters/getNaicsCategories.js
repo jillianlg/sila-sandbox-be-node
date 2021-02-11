@@ -29,7 +29,7 @@ async function getNaicsCategories() {
         authsignature: authSignature,
     };
 
-    // check kyc
+    // make request
     try {
         return await axios({
             method: 'post',
