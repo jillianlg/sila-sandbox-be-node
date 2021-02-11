@@ -20,7 +20,6 @@ const { SILA_URLS } = require('../index');
  * @param data.destinationAddress [optional] blockchain address of desired destination. if not provided will default to 'default'
  */
 async function transferSila(data) {
-    console.log('data: ', data.amount);
     // prepare the request body
     const body = {
         header: {

@@ -15,7 +15,7 @@ const { SILA_URLS } = require('../index');
  * pulls funds from a linked bank account and issues Sila to an user's wallet
  * @param data.userHandle [required] the handle of the user receiving Sila
  * @param data.amount [required] the amount of Sila to issue (1 Sila = .01 USD)
- * @param data.accountName [optional] will default to 'default' if not included
+ * @param data.accountName [optional] account from which funds will be pulled. will default to 'default' if not included
  */
 async function issueSila(data) {
     const accountName = data.accountName ? data.accountName : 'default';

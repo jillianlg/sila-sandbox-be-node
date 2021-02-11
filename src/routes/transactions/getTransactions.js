@@ -12,7 +12,7 @@ const { APP_PRIVATE_KEY, APP_HANDLE } = require('../../../.env');
 const { SILA_URLS } = require('../index');
 
 /**
- * queries all transactions associated with a user
+ * queries all transactions associated with all of a user's wallets
  * @param data.userHandle [required] the user to query
  * @param data.searchFilters [optional] robust search object. See docs for details
  */
