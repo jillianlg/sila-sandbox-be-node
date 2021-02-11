@@ -11,8 +11,8 @@ const {
     LAST_NAME,
 } = require('../consts');
 
-describe.only('tests Sila API integration', () => {
-    it.only('/register individual', async () => {
+describe('tests Sila API integration', () => {
+    it.skip('/register individual', async () => {
         const userInfo = {
             entity: {
                 first_name: FIRST_NAME,
@@ -34,7 +34,7 @@ describe.only('tests Sila API integration', () => {
         expect(parsedResponse.success).to.equal(true);
     });
     
-    it('/register business', async () => {
+    it.skip('/register business', async () => {
         const businessInfo = {
             entity: {
                 entity_name: 'test business',

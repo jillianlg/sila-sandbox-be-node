@@ -6,13 +6,6 @@ const { silaAPI } = require('../../index');
 
 // consts
 const { SILA_PATHS } = require('../../src/routes/index');
-
-const SILA_DELETE_TYPES = {
-    EMAIL: 'email',
-    PHONE: 'phone',
-    IDENTITY: 'identity',
-    ADDRESS: 'address',
-}
 const {
     USER_HANDLE_INDIVIDUAL_ONE,
     UUID_INDIVIDUAL_EMAIL,
@@ -27,7 +20,7 @@ describe.skip('tests Sila API integration', () => {
         const body = {
             apiPath: SILA_PATHS.DELETE,
             data: {
-                type: SILA_DELETE_TYPES.EMAIL,
+                type: 'email',
                 userHandle: USER_HANDLE_INDIVIDUAL_ONE,
                 uuid: UUID_INDIVIDUAL_EMAIL,
             }
@@ -47,7 +40,7 @@ describe.skip('tests Sila API integration', () => {
         const body = {
             apiPath: SILA_PATHS.DELETE,
             data: {
-                type: SILA_DELETE_TYPES.PHONE,
+                type: 'phone',
                 userHandle: USER_HANDLE_INDIVIDUAL_ONE,
                 uuid: UUID_INDIVIDUAL_PHONE,
             }
@@ -67,7 +60,7 @@ describe.skip('tests Sila API integration', () => {
         const body = {
             apiPath: SILA_PATHS.DELETE,
             data: {
-                type: SILA_DELETE_TYPES.IDENTITY,
+                type: 'identity',
                 userHandle: USER_HANDLE_INDIVIDUAL_ONE,
                 uuid: UUID_INDIVIDUAL_IDENTITY,
             }
@@ -87,7 +80,7 @@ describe.skip('tests Sila API integration', () => {
         const body = {
             apiPath: SILA_PATHS.DELETE,
             data: {
-                type: SILA_DELETE_TYPES.ADDRESS,
+                type: 'address',
                 userHandle: USER_HANDLE_INDIVIDUAL_ONE,
                 uuid: UUID_INDIVIDUAL_ADDRESS,
             }
