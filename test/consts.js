@@ -13,7 +13,7 @@ const NAICS_CODE = 721;
 const ADDRESS_ALIAS = 'Home';
 const STREET_ADDRESS_1 = 'Street Address';
 const CITY = 'City';
-const STATE = 'OR';
+const STATE = 'CA';
 const POSTAL_CODE = '90210';
 
 const PHONE = '1112223333';

@@ -14,9 +14,8 @@ const { SILA_URLS } = require('../index');
 /**
  * links a bank account to a Sila wallet
  * @param data.userHandle [required] the user whose account will be linked
- * @param data.isMicroDeposit [required as true if using microdeposit flow] boolean
- * @param data.userLegalName [required for microdeposit flow] legal first and last name of user
- * @param data.userEmailAddress [required for microdeposit flow] email address of user
+ * @param data.accountname [optional] defaults to 'default' if not included
+ * @param data.selectedAccountID [optional] defaults to first checking account if not included
  */
 async function linkAccount(data) {
     // prepare the request body
@@ -28,6 +27,9 @@ async function linkAccount(data) {
         }
     }
 
+    if(data.accountName) body.account_name = data.accountName;
+    if(data.selectedAccountID) body.selected_account_id = data.selectedAccountID;
+
     const plaidRequestBody = {
         public_key: 'fa9dd19eb40982275785b09760ab79',
         initial_products: ['transactions'],
@@ -37,6 +39,7 @@ async function linkAccount(data) {
             password: 'pass_good',
         }
     }
+
     // get the plaid token
     const response = await axios({
         method: 'post',

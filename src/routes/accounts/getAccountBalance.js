@@ -12,10 +12,13 @@ const { APP_HANDLE, APP_PRIVATE_KEY } = require('../../../.env');
 const { SILA_URLS } = require('../index');
 
 /**
- * retrieves list of user's linked accounts
- * @param data.userHandle [required] the user whose accounts will be listed
+ * retrieves the balance of a user's account
+ * @param data.userHandle [required] the user whose balance is to be retrieved
+ * @param data.accountName [optional] will default to 'default' if not included
  */
 async function getAccountBalance(data) {
+    const accountName = data.accountName ? data.accountName : 'default';
+
     // prepare the request body
     const body = {
         header: {
@@ -23,7 +26,7 @@ async function getAccountBalance(data) {
             auth_handle: APP_HANDLE,
             user_handle: data.userHandle
         },
-        account_name: 'default'
+        account_name: accountName,
     }
 
     // imitates retrieving the entity's private key from your KMS
