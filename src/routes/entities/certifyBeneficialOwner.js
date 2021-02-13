@@ -35,7 +35,7 @@ async function certifyBeneficialOwner(data) {
     // imitates retrieving the user's private key from your KMS
     // * this endpoint requires the user to be an admin
     // ** DO NOT EVER COMMIT FILES THAT CONTAIN PRIVATE KEYS **
-     const userInfo = await readFile(`./${data.userHandle}.info.json`, 'utf8')
+     const userInfo = await readFile(`./${data.adminHandle}.info.json`, 'utf8')
      const parsedUserInfo = JSON.parse(userInfo);
      const encryptedUserPrivateKey = parsedUserInfo.USER_PRIVATE_KEY;
      const USER_PRIVATE_KEY = decryptPrivateKey(encryptedUserPrivateKey);
