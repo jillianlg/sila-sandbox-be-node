@@ -36,12 +36,14 @@ const UUID_BUSINESS_PHONE = 'UUID';
 const UUID_BUSINESS_IDENTITY = 'UUID';
 
 
+// * can be retrieved from /get_entity from the entity to be certified
 // certifiation tokens
 const CERTIFICATION_TOKEN_INDIVIDUAL_ONE = 'CERTIFICATION_TOKEN';
 
 
+// * can be retrieved from /get_wallet. is also returned from a successful /update_wallet or /register_wallet request
 // blockchain address
-const BLOCKCHAIN_ADDRESS = 'BLOCKCHAIN_ADDRESS';
+const BLOCKCHAIN_ADDRESS = '0xD5d14715727A17899F4c8ba56b860CfD76a3a21B';
 
 module.exports = {
     APP_HANDLE,
