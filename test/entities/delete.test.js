@@ -14,8 +14,8 @@ const {
     UUID_INDIVIDUAL_IDENTITY,
 } = require('../../.env');
 
-describe.skip('tests Sila API integration', () => {
-    it('/delete/email', async () => {
+describe('tests Sila API integration', () => {
+    it.skip('/delete/email', async () => {
         // prepare the request body
         const body = {
             apiPath: SILA_PATHS.DELETE,
@@ -35,7 +35,7 @@ describe.skip('tests Sila API integration', () => {
         expect(parsedResponse.success).to.equal(true);
     });
 
-    it('/delete/phone', async () => {
+    it.skip('/delete/phone', async () => {
         // prepare the request body
         const body = {
             apiPath: SILA_PATHS.DELETE,
@@ -55,7 +55,7 @@ describe.skip('tests Sila API integration', () => {
         expect(parsedResponse.success).to.equal(true);
     });
 
-    it('/delete/identity', async () => {
+    it.skip('/delete/identity', async () => {
         // prepare the request body
         const body = {
             apiPath: SILA_PATHS.DELETE,
@@ -75,7 +75,7 @@ describe.skip('tests Sila API integration', () => {
         expect(parsedResponse.success).to.equal(true);
     });
 
-    it('/delete/address', async () => {
+    it.skip('/delete/address', async () => {
         // prepare the request body
         const body = {
             apiPath: SILA_PATHS.DELETE,

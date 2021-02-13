@@ -14,8 +14,8 @@ const {
 } = require('../../.env');
 const { USER_HANDLE_INDIVIDUAL_ONE } = require('../../.env');
 
-describe.skip('tests Sila API integration', () => {
-    it('/update/entity', async () => {
+describe('tests Sila API integration', () => {
+    it.skip('/update/entity', async () => {
         // prepare the request body
         const body = {
             apiPath: SILA_PATHS.UPDATE,
@@ -39,7 +39,7 @@ describe.skip('tests Sila API integration', () => {
         expect(parsedResponse.success).to.equal(true);
     });
 
-    it('/update/email', async () => {
+    it.skip('/update/email', async () => {
         // prepare the request body
         const body = {
             apiPath: SILA_PATHS.UPDATE,
@@ -62,7 +62,7 @@ describe.skip('tests Sila API integration', () => {
         expect(parsedResponse.success).to.equal(true);
     });
 
-    it('/update/address', async () => {
+    it.skip('/update/address', async () => {
         // prepare the request body
         const body = {
             apiPath: SILA_PATHS.UPDATE,
@@ -89,7 +89,7 @@ describe.skip('tests Sila API integration', () => {
         expect(parsedResponse.success).to.equal(true);
     });
 
-    it('/update/phone', async () => {
+    it.skip('/update/phone', async () => {
         // prepare the request body
         const body = {
             apiPath: SILA_PATHS.UPDATE,
@@ -112,7 +112,7 @@ describe.skip('tests Sila API integration', () => {
         expect(parsedResponse.success).to.equal(true);
     });
 
-    it('/update/identity', async () => {
+    it.skip('/update/identity', async () => {
         // prepare the request body
         const body = {
             apiPath: SILA_PATHS.UPDATE,

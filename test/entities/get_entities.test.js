@@ -18,6 +18,8 @@ describe.skip('tests Sila API integration', () => {
         const response = await silaAPI({ body: jsonBody });
         const parsedResponse = JSON.parse(response.body);
 
+        console.log('parsedResponse: ', parsedResponse);
+
         expect(parsedResponse.success).to.equal(true);
     });
 });

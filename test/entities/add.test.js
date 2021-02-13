@@ -18,8 +18,8 @@ const {
 } = require('../consts');
 const { USER_HANDLE_INDIVIDUAL_ONE } = require('../../.env');
 
-describe.skip('tests Sila API integration', () => {
-    it('/add/email', async () => {
+describe('tests Sila API integration', () => {
+    it.skip('/add/email', async () => {
         // prepare the request body
         const body = {
             apiPath: SILA_PATHS.ADD,
@@ -40,7 +40,7 @@ describe.skip('tests Sila API integration', () => {
 
         expect(parsedResponse.success).to.equal(true);
     });
-    it('/add/address', async () => {
+    it.skip('/add/address', async () => {
         // prepare the request body
         const body = {
             apiPath: SILA_PATHS.ADD,
@@ -66,7 +66,7 @@ describe.skip('tests Sila API integration', () => {
 
         expect(parsedResponse.success).to.equal(true);
     });
-    it('/add/phone', async () => {
+    it.skip('/add/phone', async () => {
         // prepare the request body
         const body = {
             apiPath: SILA_PATHS.ADD,
@@ -88,7 +88,7 @@ describe.skip('tests Sila API integration', () => {
 
         expect(parsedResponse.success).to.equal(true);
     });
-    it('/add/identity', async () => {
+    it.skip('/add/identity', async () => {
         // prepare the request body
         const body = {
             apiPath: SILA_PATHS.ADD,
