@@ -4,11 +4,11 @@ const EthCrypto = require('eth-crypto');
 const Web3 = require('web3');
 
 // consts
-const { ENCRYPTION_KEY, ENCRYPTION_IV_STRING } = require('../.env');
+const { ENCRYPTION_KEY, ENCRYPTION_IV_STRING, WEB3_URL } = require('../.env');
 
 //creates a wallet on Ethereum
 function createWallet() {
-    const web3 = new Web3('https://localhost:8080');
+    const web3 = new Web3(WEB3_URL);
     const wallet = web3.eth.accounts.create();
     return {
         address: wallet.address,
@@ -60,3 +60,6 @@ module.exports = {
     encryptPrivateKey,
     decryptPrivateKey
 }
+
+git config --global user.email "you@example.com"
+  git config --global user.name "Your Name"

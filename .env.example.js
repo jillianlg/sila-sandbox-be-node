@@ -7,7 +7,7 @@ const APP_HANDLE = 'YOUR_APP_HANDLE_HERE';
 const APP_PRIVATE_KEY = 'YOUR_APP_PRIVATE_KEY_HERE'; // ** DO NOT COMMIT NOR SHARE YOUR APP PRIVATE KEY **
 const ENCRYPTION_KEY = 'YOUR_ENCRYPTION_KEY_HERE'; // must be 32 characters
 const ENCRYPTION_IV_STRING = 'YOUR_ENCRYPTION_IV_STRING_HERE'; // must be 16 characters
-
+const WEB3_URL = 'YOUR_WEB3_URL_HERE'; // url for web3 to use as a host
 
 // * user handles will need to be pulled from test files
 // * test files are written into the home directory upon testing the /register endpoint
@@ -50,6 +50,7 @@ module.exports = {
     APP_PRIVATE_KEY,
     ENCRYPTION_KEY,
     ENCRYPTION_IV_STRING,
+    WEB3_URL,
     USER_HANDLE_INDIVIDUAL_ONE,
     USER_HANDLE_INDIVIDUAL_TWO,
     USER_HANDLE_BUSINESS_ONE,
