@@ -22,7 +22,7 @@ async function linkAccount(data) {
     const body = {
         header: {
             created: Math.floor(Date.now() / 1000),
-            app_handle APP_HANDLE,
+            app_handle: APP_HANDLE,
             user_handle: data.userHandle
         }
     }
