@@ -16,6 +16,7 @@ const SILA_URLS = {
     CERTIFY_BUSINESS: `${SILA_BASE_SANDBOX_URL}/certify_business`,
     GET_ENTITIES: `${SILA_BASE_SANDBOX_URL}/get_entities`,
     GET_ENTITY: `${SILA_BASE_SANDBOX_URL}/get_entity`,
+    LIST_DOCUMENTS: `${SILA_BASE_SANDBOX_URL}/list_documents`,
 
     // acounts
     LINK_ACCOUNT: `${SILA_BASE_SANDBOX_URL}/link_account`,

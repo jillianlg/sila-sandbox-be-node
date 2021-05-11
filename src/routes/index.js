@@ -13,6 +13,7 @@ const { certifyBeneficialOwner } = require('./entities/certifyBeneficialOwner');
 const { certifyBusiness } = require('./entities/certifyBusiness');
 const { getEntities } = require('./entities/getEntities');
 const { getEntity } = require('./entities/getEntity');
+const { listDocuments } = require('./entities/listDocuments');
 
 // accounts
 const { linkAccount } = require('./accounts/linkAccount');
@@ -54,6 +55,7 @@ const SILA_PATHS = {
     CERTIFY_BUSINESS: 'CERTIFY_BUSINESS',
     GET_ENTITIES: 'GET_ENTITIES',
     GET_ENTITY: 'GET_ENTITY',
+    LIST_DOCUMENTS: 'LIST_DOCUMENTS',
 
     // accounts
     LINK_ACCOUNT: 'LINK_ACCOUNT',
@@ -96,6 +98,7 @@ const SILA_ROUTES = {
     [SILA_PATHS.CERTIFY_BUSINESS]: certifyBusiness,
     [SILA_PATHS.GET_ENTITY]: getEntity,
     [SILA_PATHS.GET_ENTITIES]: getEntities,
+    [SILA_PATHS.LIST_DOCUMENTS]: listDocuments,
 
     // accounts
     [SILA_PATHS.LINK_ACCOUNT]: linkAccount,
