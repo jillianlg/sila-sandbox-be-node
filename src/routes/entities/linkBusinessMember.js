@@ -34,7 +34,7 @@ async function linkBusinessMember(data) {
     const body = {
         header: {
             created: Math.floor(Date.now() / 1000),
-            auth_handle: APP_HANDLE,
+            app_handle APP_HANDLE,
             user_handle: userHandle,
             business_handle: data.businessHandle,
             reference: 'ref'

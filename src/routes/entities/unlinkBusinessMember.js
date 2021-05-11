@@ -27,7 +27,7 @@ async function unlinkBusinessMember(data) {
     const body = {
         header: {
             created: Math.floor(Date.now() / 1000),
-            auth_handle: APP_HANDLE,
+            app_handle APP_HANDLE,
             user_handle: member_handle,
             business_handle: data.businessHandle,
             reference: 'ref'

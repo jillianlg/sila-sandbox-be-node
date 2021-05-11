@@ -20,7 +20,7 @@ async function getAccounts(data) {
     const body = {
         header: {
             created: Math.floor(Date.now() / 1000),
-            auth_handle: APP_HANDLE,
+            app_handle APP_HANDLE,
             user_handle: data.userHandle
         },
         message: 'get_accounts_msg'
