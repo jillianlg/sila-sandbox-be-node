@@ -15,6 +15,7 @@ const { getEntities } = require('./entities/getEntities');
 const { getEntity } = require('./entities/getEntity');
 const { listDocuments } = require('./entities/listDocuments');
 const { getDocument } = require('./entities/getDocument');
+const { documents } = require('./entities/documents');
 
 // accounts
 const { linkAccount } = require('./accounts/linkAccount');
@@ -58,6 +59,7 @@ const SILA_PATHS = {
     GET_ENTITY: 'GET_ENTITY',
     LIST_DOCUMENTS: 'LIST_DOCUMENTS',
     GET_DOCUMENT: 'GET_DOCUMENT',
+    DOCUMENTS: 'DOCUMENTS',
 
     // accounts
     LINK_ACCOUNT: 'LINK_ACCOUNT',
@@ -102,6 +104,7 @@ const SILA_ROUTES = {
     [SILA_PATHS.GET_ENTITIES]: getEntities,
     [SILA_PATHS.LIST_DOCUMENTS]: listDocuments,
     [SILA_PATHS.GET_DOCUMENT]: getDocument,
+    [SILA_PATHS.DOCUMENTS]: documents,
 
     // accounts
     [SILA_PATHS.LINK_ACCOUNT]: linkAccount,

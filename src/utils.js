@@ -53,10 +53,18 @@ function signString(privateKey, string) {
     return EthCrypto.sign(privateKey, stringHash).substring(2);
 }
 
+// hashes an image
+function hashImage(image) {
+    // encrypt image
+    const imageHash = crypto.createHash('sha256').update(image).digest('hex');
+    return imageHash;
+}
+
 module.exports = {
     createWallet,
     signMessage,
     signString,
     encryptPrivateKey,
-    decryptPrivateKey
+    decryptPrivateKey,
+    hashImage
 }
