@@ -17,6 +17,7 @@ const SILA_URLS = {
     GET_ENTITIES: `${SILA_BASE_SANDBOX_URL}/get_entities`,
     GET_ENTITY: `${SILA_BASE_SANDBOX_URL}/get_entity`,
     LIST_DOCUMENTS: `${SILA_BASE_SANDBOX_URL}/list_documents`,
+    GET_DOCUMENT: `${SILA_BASE_SANDBOX_URL}/get_document`,
 
     // acounts
     LINK_ACCOUNT: `${SILA_BASE_SANDBOX_URL}/link_account`,
