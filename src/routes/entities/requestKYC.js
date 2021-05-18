@@ -27,6 +27,8 @@ async function requestKYC(data) {
         message: 'header_msg'
     }
 
+    if(data.kycLevel) body.kyc_level = data.kycLevel;
+
     // imitates retrieving the entity's private key from your KMS
     const entityInfo = await readFile(`./${data.userHandle}.info.json`, 'utf8')
     const parsedEntityInfo = JSON.parse(entityInfo);
