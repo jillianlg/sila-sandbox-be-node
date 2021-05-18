@@ -17,7 +17,8 @@ const {
     POSTAL_CODE,
     PHONE,
     SSN,
-    BIRTHDATE
+    BIRTHDATE,
+    EIN
 } = require('../consts');
 
 describe('tests Sila API integration', () => {
@@ -82,7 +83,7 @@ describe('tests Sila API integration', () => {
         expect(parsedResponse.success).to.equal(true);
     });
     
-    it.skip('/register business', async () => {
+    it.skip('/register minimal business', async () => {
         const businessInfo = {
             entity: {
                 entity_name: 'test business',
@@ -95,6 +96,46 @@ describe('tests Sila API integration', () => {
         const body = {
             apiPath: SILA_PATHS.REGISTER,
             data: businessInfo
+        }
+
+        const jsonBody = JSON.stringify(body);
+        const response = await silaAPI({ body: jsonBody });
+        const parsedResponse = JSON.parse(response.body);
+        
+        console.log('parsedResponse: ', parsedResponse);
+
+        expect(parsedResponse.success).to.equal(true);
+    });
+
+    it.skip('/register complete business', async () => {
+        const userInfo = {
+            address: {
+                address_alias: ADDRESS_ALIAS,
+                street_address_1: STREET_ADDRESS_1,
+                city: CITY,
+                state: STATE,
+                country: "US",
+                postal_code: POSTAL_CODE
+            },
+            identity: {
+                identity_alias: "EIN",
+                identity_value: EIN
+            },
+            contact: {
+                phone: PHONE,
+                email: EMAIL,
+            },
+            entity: {
+                entity_name: 'test business',
+                business_type: 'corporation',
+                naics_code: 721,
+                type: 'business',
+            }
+        }
+
+        const body = {
+            apiPath: SILA_PATHS.REGISTER,
+            data: userInfo
         }
 
         const jsonBody = JSON.stringify(body);
