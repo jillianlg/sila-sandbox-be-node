@@ -24,6 +24,7 @@ const SILA_URLS = {
     LINK_ACCOUNT: `${SILA_BASE_SANDBOX_URL}/link_account`,
     GET_ACCOUNTS: `${SILA_BASE_SANDBOX_URL}/get_accounts`,
     GET_ACCOUNT_BALANCE: `${SILA_BASE_SANDBOX_URL}/get_account_balance`,
+    PLAID_LINK_TOKEN: `${SILA_BASE_SANDBOX_URL}/plaid_link_token`,
 
     // wallets
     REGISTER_WALLET: `${SILA_BASE_SANDBOX_URL}/register_wallet`,
