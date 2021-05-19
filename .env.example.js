@@ -7,7 +7,7 @@ const APP_HANDLE = 'YOUR_APP_HANDLE_HERE';
 const APP_PRIVATE_KEY = 'YOUR_APP_PRIVATE_KEY_HERE'; // ** DO NOT COMMIT NOR SHARE YOUR APP PRIVATE KEY **
 const ENCRYPTION_KEY = 'YOUR_ENCRYPTION_KEY_HERE'; // must be 32 characters
 const ENCRYPTION_IV_STRING = 'YOUR_ENCRYPTION_IV_STRING_HERE'; // must be 16 characters
-
+const WEB3_URL = 'YOUR_WEB3_URL_HERE'; // url for web3 to use as a host
 
 // * user handles will need to be pulled from test files
 // * test files are written into the home directory upon testing the /register endpoint
@@ -43,7 +43,7 @@ const CERTIFICATION_TOKEN_INDIVIDUAL_ONE = 'CERTIFICATION_TOKEN';
 
 // * can be retrieved from /get_wallet. is also returned from a successful /update_wallet or /register_wallet request
 // blockchain address
-const BLOCKCHAIN_ADDRESS = '0xD5d14715727A17899F4c8ba56b860CfD76a3a21B';
+const BLOCKCHAIN_ADDRESS = 'BLOCKCHAIN_ADDRESS';
 
 module.exports = {
     APP_HANDLE,
@@ -64,4 +64,5 @@ module.exports = {
     UUID_BUSINESS_IDENTITY,
     CERTIFICATION_TOKEN_INDIVIDUAL_ONE,
     BLOCKCHAIN_ADDRESS,
+    WEB3_URL
 }
