@@ -33,6 +33,8 @@ async function issueSila(data) {
         account_name: accountName,
     }
 
+    if(data.processingType) body.processing_type = data.processingType;
+
     // imitates retrieving the entity's private key from your KMS
     const entityInfo = await readFile(`./${data.userHandle}.info.json`, 'utf8')
     const parsedEntityInfo = JSON.parse(entityInfo);
