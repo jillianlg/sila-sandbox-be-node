@@ -16,7 +16,7 @@ const {
     SSN,
     PHONE,
 } = require('../consts');
-const { USER_HANDLE_INDIVIDUAL_ONE } = require('../../.env');
+const { USER_HANDLE_INDIVIDUAL_ONE, DEVICE_BLACK_BOX } = require('../../.env');
 
 describe('tests Sila API integration', () => {
     it.skip('/add/email', async () => {
@@ -88,6 +88,7 @@ describe('tests Sila API integration', () => {
 
         expect(parsedResponse.success).to.equal(true);
     });
+
     it.skip('/add/identity', async () => {
         // prepare the request body
         const body = {
@@ -99,6 +100,29 @@ describe('tests Sila API integration', () => {
                 updateBody: {
                     identity_alias: 'SSN',
                     identity_value: SSN
+                }
+            }
+        }
+
+        const jsonBody = JSON.stringify(body);
+        const response = await silaAPI({ body: jsonBody });
+        const parsedResponse = JSON.parse(response.body);
+
+        console.log('parsedResponse: ', parsedResponse);
+
+        expect(parsedResponse.success).to.equal(true);
+    });
+
+    it.skip('/add/device', async () => {
+        // prepare the request body
+        const body = {
+            apiPath: SILA_PATHS.ADD,
+            data: {
+                type: 'device',
+                userHandle: USER_HANDLE_INDIVIDUAL_ONE,
+                email: EMAIL,
+                updateBody: {
+                    device_fingerprint: DEVICE_BLACK_BOX
                 }
             }
         }
