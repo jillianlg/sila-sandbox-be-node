@@ -43,7 +43,11 @@ const CERTIFICATION_TOKEN_INDIVIDUAL_ONE = 'CERTIFICATION_TOKEN';
 
 // * can be retrieved from /get_wallet. is also returned from a successful /update_wallet or /register_wallet request
 // blockchain address
-const BLOCKCHAIN_ADDRESS = '0xD5d14715727A17899F4c8ba56b860CfD76a3a21B';
+const BLOCKCHAIN_ADDRESS = 'BLOCKCHAIN_ADDRESS';
+
+
+// * can be retrieved using iovation. you must be approved for instant ach in order to receive this software
+const DEVICE_BLACK_BOX = 'DEVICE_BLACK_BOX';
 
 module.exports = {
     APP_HANDLE,
@@ -65,4 +69,5 @@ module.exports = {
     UUID_BUSINESS_IDENTITY,
     CERTIFICATION_TOKEN_INDIVIDUAL_ONE,
     BLOCKCHAIN_ADDRESS,
+    DEVICE_BLACK_BOX
 }
