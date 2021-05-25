@@ -49,6 +49,10 @@ const BLOCKCHAIN_ADDRESS = 'BLOCKCHAIN_ADDRESS';
 // * can be retrieved using iovation. you must be approved for instant ach in order to receive this software
 const DEVICE_BLACK_BOX = 'DEVICE_BLACK_BOX';
 
+
+// * uuid provided for testing purposes
+const BUSINESS_UUID = 'a9f38290-ce34-42db-95ab-630ebba6084a';
+
 module.exports = {
     APP_HANDLE,
     APP_PRIVATE_KEY,
@@ -69,5 +73,6 @@ module.exports = {
     UUID_BUSINESS_IDENTITY,
     CERTIFICATION_TOKEN_INDIVIDUAL_ONE,
     BLOCKCHAIN_ADDRESS,
-    DEVICE_BLACK_BOX
+    DEVICE_BLACK_BOX,
+    BUSINESS_UUID
 }
