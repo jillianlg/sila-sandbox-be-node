@@ -2,6 +2,7 @@
 const axios = require('axios');
 const fs = require('fs');
 const util = require('util');
+const FormData = require('form-data');
 const readFile = util.promisify(fs.readFile);
 
 // local packages
@@ -15,34 +16,37 @@ const { SILA_URLS } = require('../../consts');
 * upload supporting documentation for KYC
 */
 async function documents(data) {
-    // prepare the request body
-    const body = {
-        data: {
-            header: {
-                created: Math.floor(Date.now() / 1000),
-                app_handle: APP_HANDLE,
-                user_handle: data.userHandle,
-                reference: 'ref'
-            },
-            message: 'header_msg',
-            filename: 'blank',
-            mime_type: 'image/jpeg',
-            document_type: 'id_drivers_license',
-            identity_type: 'license',
-        }
-    }
+    // create form data object
+    const formData = new FormData();
+
+    // add the image to the request
+    formData.append('file', fs.ReadStream('./blank.jpeg'));
 
     // convert the image into binary data
     const imageBinary = await readFile('./blank.jpeg');
 
-    // add the image to the request
-    body.files = { file: imageBinary }
-
     // create hash of the image
     const imageHash = hashImage(imageBinary);
+    
+    // create the form data
+    const rawFormData = {
+        header: {
 
-    // add hash to request
-    body.data.hash = imageHash;
+            created: Math.floor(Date.now() / 1000),
+            app_handle: APP_HANDLE,
+            user_handle: data.userHandle,
+            reference: 'ref'
+        },
+        message: 'header_msg',
+        filename: 'blank.jpeg',
+        mime_type: 'image/jpeg',
+        document_type: 'id_drivers_license',
+        identity_type: 'license',
+        hash: imageHash
+    }
+
+    // append data to the formData
+    formData.append('data', JSON.stringify(rawFormData));
 
     // imitates retrieving the entity's private key from your KMS
     const entityInfo = await readFile(`./${data.userHandle}.info.json`, 'utf8')
@@ -54,14 +58,13 @@ async function documents(data) {
 
     // generate authorization headers
     const appPrivateKey = APP_PRIVATE_KEY;
-    const authSignature = signMessage(appPrivateKey, body);
-    const userSignature = signMessage(ENTITY_PRIVATE_KEY, body);
+    const authSignature = signMessage(appPrivateKey, rawFormData);
+    const userSignature = signMessage(ENTITY_PRIVATE_KEY, rawFormData);
 
-    const headers = {
-        authsignature: authSignature,
-        usersignature: userSignature,
-        'Content-Type': 'multipart/form-data'
-    };
+    // create request headers
+    const headers = formData.getHeaders();
+    headers.authsignature = authSignature;
+    headers.usersignature = userSignature;
 
     // make request
     try {
@@ -69,7 +72,7 @@ async function documents(data) {
             method: 'post',
             url: SILA_URLS.DOCUMENTS,
             headers: headers,
-            data: body,
+            data: formData,
             validateStatus: () => { return true }
         });
     } catch(error) {
