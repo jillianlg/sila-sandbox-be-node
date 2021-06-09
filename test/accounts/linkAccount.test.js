@@ -15,6 +15,9 @@ describe.skip('tests Sila API integration', () => {
             apiPath: SILA_PATHS.LINK_ACCOUNT,
             data: {
                 userHandle: USER_HANDLE_INDIVIDUAL_ONE,
+                plaidTokenType: 'PLAID_TOKEN_TYPE',
+                selectedAccountID: 'ACCOUNT_ID',
+                plaidToken: 'PLAID_TOKEN'
             },
         }
 
