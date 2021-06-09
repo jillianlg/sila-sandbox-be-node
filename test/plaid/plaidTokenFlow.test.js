@@ -39,7 +39,7 @@ describe('tests Plaid token flow', () => {
 
     it.skip('retrieves an access token', async () => {
 
-        // use the public token from the previos test in this test
+        // use the public token from the previous test in this test
         // use your own plaid clientID and secret
         const plaidRequestBody = {
             client_id: PLAID_CLIENT_ID,
