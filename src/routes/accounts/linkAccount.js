@@ -29,26 +29,33 @@ async function linkAccount(data) {
 
     if(data.accountName) body.account_name = data.accountName;
     if(data.selectedAccountID) body.selected_account_id = data.selectedAccountID;
+    if(data.plaidTokenType) body.plaid_token = data.plaidTokenType;
 
-    const plaidRequestBody = {
-        public_key: 'fa9dd19eb40982275785b09760ab79',
-        initial_products: ['transactions'],
-        institution_id: 'ins_109508',
-        credentials: {
-            username: 'user_good',
-            password: 'pass_good',
+    // if a plaid token is included, add it to the body
+    if(data.plaidToken) {
+        body.plaid_token = data.plaidToken
+    } else {
+        // if a plaid token is not included, use legacy integration
+        const plaidRequestBody = {
+            public_key: 'fa9dd19eb40982275785b09760ab79',
+            initial_products: ['transactions'],
+            institution_id: 'ins_109508',
+            credentials: {
+                username: 'user_good',
+                password: 'pass_good',
+            }
         }
+    
+        // get the plaid token
+        const response = await axios({
+            method: 'post',
+            url: 'https://sandbox.plaid.com/link/item/create',
+            data: plaidRequestBody,
+            validateStatus: () => { return true }
+        });
+    
+        body.public_token = response.data.public_token;
     }
-
-    // get the plaid token
-    const response = await axios({
-        method: 'post',
-        url: 'https://sandbox.plaid.com/link/item/create',
-        data: plaidRequestBody,
-        validateStatus: () => { return true }
-    });
-
-    body.public_token = response.data.public_token;
 
     // imitates retrieving the entity's private key from your KMS
     const entityInfo = await readFile(`./${data.userHandle}.info.json`, 'utf8')
