@@ -22,6 +22,8 @@ async function plaidLinkToken(data) {
         },
     }
 
+    body.link_token_type = data.linkTokenType ? data.linkTokenType : 'link';
+
     // generate authorization headers
     const authSignature = signMessage(APP_PRIVATE_KEY, body);
 
