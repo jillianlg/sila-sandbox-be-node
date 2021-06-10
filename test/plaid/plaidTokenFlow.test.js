@@ -4,20 +4,78 @@ const { expect } = require('chai');
 
 const { PLAID_CLIENT_ID, PLAID_SECRET } = require('../../.env');
 
-// Use this series of three tests to test the plaid processor token flow
-
-describe('tests Plaid token flow', () => {
-
-    // you will first need to retrieve a public token using Sila's public key
+describe('LINK: tests Plaid link token flow', () => {
+    // retrieves a public token using Sila's link token
     it.skip('retrieves a public token', async () => {
         const plaidRequestBody = {
-            public_key: 'fa9dd19eb40982275785b09760ab79',
-            initial_products: ['transactions'],
-            institution_id: 'ins_109508',
             credentials: {
                 username: 'user_good',
                 password: 'pass_good',
-            }
+            },
+            initial_products: ['auth', 'transactions', 'identity'],
+            institution_id: 'ins_3',
+            // retrieve from our /plaid_link_token endpoint
+            link_token: 'LINK_TOKEN'
+        }
+
+        const response = await axios({
+            method: 'post',
+            url: 'https://sandbox.plaid.com/link/item/create',
+            data: plaidRequestBody,
+            validateStatus: () => { return true }
+        });
+
+        // pass this public_token into /link_account
+        console.log('public_token: ', response.data.public_token);
+        
+        // OPTIONAL pass an accountID into /link_account
+        console.log('account: ', response.data.accounts);
+
+        expect(response.data.public_token).to.exist;
+
+    });
+});
+
+describe('PROCESSOR: tests Plaid processor token flow', () => {    
+    // retrieves a link token using Plaid creds
+    it.skip('retrieves a link token', async () => {
+        const plaidRequestBody = {
+            // use your own plaid clientID and secret
+            client_id: PLAID_CLIENT_ID,
+            secret: PLAID_SECRET,
+            user: {
+                client_user_id: PLAID_CLIENT_ID
+            },
+            client_name: 'CLIENT_NAME',
+            products: ['auth', 'transactions'],
+            language: 'en',
+            country_codes: ['US'],
+        }
+
+        const response = await axios({
+            method: 'post',
+            url: 'https://sandbox.plaid.com/link/token/create',
+            data: plaidRequestBody,
+            validateStatus: () => { return true }
+        });
+
+        // record link_token for the next test
+        console.log('link_token: ', response.data.link_token);
+
+        expect(response.data.link_token).to.exist;
+    });
+
+    // retrieves a public_token using link_token
+    it.skip('retrieves a public token', async () => {
+        const plaidRequestBody = {
+            credentials: {
+                username: 'user_good',
+                password: 'pass_good',
+            },
+            initial_products: ['auth', 'transactions', 'identity'],
+            institution_id: 'ins_3',
+            // retrieve from your own /link/token/create request
+            link_token: 'LINK_TOKEN'
         }
 
         const response = await axios({
@@ -36,14 +94,13 @@ describe('tests Plaid token flow', () => {
         expect(response.data.public_token).to.exist;
 
     });
-
     it.skip('retrieves an access token', async () => {
 
-        // use the public token from the previous test in this test
         // use your own plaid clientID and secret
         const plaidRequestBody = {
             client_id: PLAID_CLIENT_ID,
             secret: PLAID_SECRET,
+            // use the public token from the previous test
             public_token: 'PUBLIC_TOKEN',
         }
 
@@ -62,14 +119,14 @@ describe('tests Plaid token flow', () => {
 
     it.skip('retrieves a processor token', async () => {
 
-        // use the access_token from the previous test
-        // use the account_id from the first test
-        // use your own plaid clientID and secret
         const plaidRequestBody = {
+            // use your own plaid clientID and secret
             client_id: PLAID_CLIENT_ID,
             secret: PLAID_SECRET,
             processor: 'sila_money',
+            // use the access_token from the previous test
             access_token: 'ACCESS_TOKEN',
+            // use the account_id from the first test
             account_id: 'ACCOUNT_ID',
         }
 
@@ -84,5 +141,36 @@ describe('tests Plaid token flow', () => {
         console.log('process_token: ', response.data.processor_token);
 
         expect(response.data.processor_token).to.exist;
+    });
+});
+
+describe('LEGACY: tests Plaid legacy token flow', () => {
+    // retrieves a public token from Plaid using Sila's public key
+    it.skip('retrieves a public token from Plaid', async () => {
+        const plaidRequestBody = {
+            public_key: 'fa9dd19eb40982275785b09760ab79',
+            initial_products: ['transactions'],
+            institution_id: 'ins_109508',
+            credentials: {
+                username: 'user_good',
+                password: 'pass_good',
+            }
+        }
+
+        const response = await axios({
+            method: 'post',
+            url: 'https://sandbox.plaid.com/link/item/create',
+            data: plaidRequestBody,
+            validateStatus: () => { return true }
+        });
+
+        // record the public token for use in the /link_account endpoint
+        console.log('public_token: ', response.data.public_token);
+        
+        // OPTIONAL: record an account ID if you wish to submit one to /link_account
+        console.log('account: ', response.data.accounts);
+
+        expect(response.data.public_token).to.exist;
+
     });
 });
