@@ -22,6 +22,7 @@ const { linkAccount } = require('./accounts/linkAccount');
 const { getAccounts } = require('./accounts/getAccounts');
 const { getAccountBalance } = require('./accounts/getAccountBalance');
 const { plaidLinkToken } = require('./accounts/plaidLinkToken');
+const { plaidUpdateLinkToken } = require('./accounts/plaidUpdateLinkToken');
 const { deleteAccount } = require('./accounts/deleteAccount');
 
 // wallets
@@ -68,6 +69,7 @@ const SILA_PATHS = {
     GET_ACCOUNTS: 'GET_ACCOUNTS',
     GET_ACCOUNT_BALANCE: 'GET_ACCOUNT_BALANCE',
     PLAID_LINK_TOKEN: 'PLAID_LINK_TOKEN',
+    PLAID_UPDATE_LINK_TOKEN: 'PLAID_UPDATE_LINK_TOKEN',
     DELETE_ACCOUNT: 'DELETE_ACCOUNT',
 
     // wallets
@@ -115,6 +117,7 @@ const SILA_ROUTES = {
     [SILA_PATHS.GET_ACCOUNTS]: getAccounts,
     [SILA_PATHS.GET_ACCOUNT_BALANCE]: getAccountBalance,
     [SILA_PATHS.PLAID_LINK_TOKEN]: plaidLinkToken,
+    [SILA_PATHS.PLAID_UPDATE_LINK_TOKEN]: plaidUpdateLinkToken,
     [SILA_PATHS.DELETE_ACCOUNT]: deleteAccount,
     
     // wallets
