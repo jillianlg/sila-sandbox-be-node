@@ -37,7 +37,8 @@ describe('LINK: tests Plaid link token flow', () => {
 });
 
 describe('PROCESSOR: tests Plaid processor token flow', () => {    
-    // retrieves a link token using Plaid creds
+    // retrieves a link token from our API
+    // this link token is used to launch the Plaid front end modal
     it.skip('retrieves a link token', async () => {
         const plaidRequestBody = {
             // use your own plaid clientID and secret
@@ -66,6 +67,8 @@ describe('PROCESSOR: tests Plaid processor token flow', () => {
     });
 
     // retrieves a public_token using link_token
+    // this step imitates the end user entering their bank account information
+    // the link account is used to launch the Plaid front end modal
     it.skip('retrieves a public token', async () => {
         const plaidRequestBody = {
             credentials: {
@@ -94,6 +97,9 @@ describe('PROCESSOR: tests Plaid processor token flow', () => {
         expect(response.data.public_token).to.exist;
 
     });
+
+    // this takes the public token retrieved from the front end
+    // it uses the public token on the back end and exchanges it for an access token from Plaid
     it.skip('retrieves an access token', async () => {
 
         // use your own plaid clientID and secret
@@ -117,6 +123,9 @@ describe('PROCESSOR: tests Plaid processor token flow', () => {
         expect(response.data.access_token).to.exist;
     });
 
+    // uses the access token provided from Plaid
+    // the access token proves to Plaid that we are authorized to link an account to our system
+    // this processor token can then be used with our /link_account endpoint to finalize the link
     it.skip('retrieves a processor token', async () => {
 
         const plaidRequestBody = {
