@@ -18,6 +18,7 @@ const { getDocument } = require('./entities/getDocument');
 const { documents } = require('./entities/documents');
 
 // accounts
+const { checkInstantAch } = require('./accounts/checkInstantAch');
 const { linkAccount } = require('./accounts/linkAccount');
 const { getAccounts } = require('./accounts/getAccounts');
 const { getAccountBalance } = require('./accounts/getAccountBalance');
@@ -65,6 +66,7 @@ const SILA_PATHS = {
     DOCUMENTS: 'DOCUMENTS',
 
     // accounts
+    CHECK_INSTANT_ACH: 'CHECK_INSTANT_ACH',
     LINK_ACCOUNT: 'LINK_ACCOUNT',
     GET_ACCOUNTS: 'GET_ACCOUNTS',
     GET_ACCOUNT_BALANCE: 'GET_ACCOUNT_BALANCE',
@@ -113,6 +115,7 @@ const SILA_ROUTES = {
     [SILA_PATHS.DOCUMENTS]: documents,
 
     // accounts
+    [SILA_PATHS.CHECK_INSTANT_ACH]: checkInstantAch,
     [SILA_PATHS.LINK_ACCOUNT]: linkAccount,
     [SILA_PATHS.GET_ACCOUNTS]: getAccounts,
     [SILA_PATHS.GET_ACCOUNT_BALANCE]: getAccountBalance,

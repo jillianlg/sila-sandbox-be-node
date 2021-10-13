@@ -21,6 +21,7 @@ const SILA_URLS = {
     DOCUMENTS: `${SILA_BASE_SANDBOX_URL}/documents`,
 
     // acounts
+    CHECK_INSTANT_ACH: `${SILA_BASE_SANDBOX_URL}/check_instant_ach`,
     LINK_ACCOUNT: `${SILA_BASE_SANDBOX_URL}/link_account`,
     GET_ACCOUNTS: `${SILA_BASE_SANDBOX_URL}/get_accounts`,
     GET_ACCOUNT_BALANCE: `${SILA_BASE_SANDBOX_URL}/get_account_balance`,
